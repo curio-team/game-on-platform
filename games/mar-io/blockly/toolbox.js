@@ -57,10 +57,10 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="world_length"  x="30"  y="270"> <value name="VALUE"><block type="math_number"><field name="NUM">4</field></block></value></block>
   <block type="world_coins"   x="30"  y="350"> <value name="VALUE"><block type="math_number"><field name="NUM">15</field></block></value></block>
   <block type="enemy_goombas" x="30"  y="430"> <value name="VALUE"><block type="math_number"><field name="NUM">5</field></block></value></block>
-  <block type="enemy_koopas"  x="420" y="30">  <value name="VALUE"><block type="math_number"><field name="NUM">2</field></block></value></block>
-  <block type="enemy_speed"   x="420" y="110"> <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value></block>
-  <block type="rules_lives"   x="420" y="190"> <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value></block>
-  <block type="enemy_stomp"   x="420" y="270"> <field name="ACTION">squish</field></block>
-  <block type="look_sky"      x="420" y="350"> <field name="COLOR">#5c94fc</field></block>
-  <block type="look_mario"    x="420" y="420"> <field name="COLOR">#e60000</field></block>
+  <block type="enemy_koopas"  x="520" y="30">  <value name="VALUE"><block type="math_number"><field name="NUM">2</field></block></value></block>
+  <block type="enemy_speed"   x="520" y="110"> <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value></block>
+  <block type="rules_lives"   x="520" y="190"> <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value></block>
+  <block type="enemy_stomp"   x="520" y="270"> <field name="ACTION">squish</field></block>
+  <block type="look_sky"      x="520" y="350"> <field name="COLOR">#5c94fc</field></block>
+  <block type="look_mario"    x="520" y="420"> <field name="COLOR">#e60000</field></block>
 </xml>`;

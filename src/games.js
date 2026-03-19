@@ -33,4 +33,11 @@ export const games = [
     icon: '🍄',
     color: '#e60000',
   },
+  {
+    id: 'mar-io-advanced',
+    title: 'marIO++',
+    description: 'Schrijf de echte game loop — zwaartekracht, vijanden en botsingen — volledig in Blockly.',
+    icon: '🍄+',
+    color: '#e63946',
+  },
 ];

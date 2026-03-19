@@ -11,6 +11,7 @@ export default defineConfig({
         flappyBirdAdvanced: 'games/flappy-bird-advanced/index.html',
         guessTheNumber: 'games/guess-the-number/index.html',
         marIo: 'games/mar-io/index.html',
+        marIoAdvanced: 'games/mar-io-advanced/index.html',
       },
     },
   },
