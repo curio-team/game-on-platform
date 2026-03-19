@@ -16,5 +16,4 @@ export function resetConfig() {
   window.GAME_CONFIG = { ...DEFAULT_CONFIG };
 }
 
-// Ensure GAME_CONFIG exists as soon as this module is imported.
-resetConfig();
+resetConfig(); // initialise on import

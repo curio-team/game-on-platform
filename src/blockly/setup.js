@@ -1,9 +1,8 @@
 import * as Blockly from 'blockly';
-import { toolboxConfig, DEFAULT_WORKSPACE_XML } from './toolbox.js';
 
 let workspace = null;
 
-export function initBlockly() {
+export function initBlockly(toolboxConfig, defaultWorkspaceXML) {
   workspace = Blockly.inject('blocklyDiv', {
     toolbox: toolboxConfig,
     grid: { spacing: 20, length: 3, colour: '#1a1a3a', snap: true },
@@ -29,7 +28,7 @@ export function initBlockly() {
   });
 
   const parser = new DOMParser();
-  const dom = parser.parseFromString(DEFAULT_WORKSPACE_XML, 'text/xml').documentElement;
+  const dom = parser.parseFromString(defaultWorkspaceXML, 'text/xml').documentElement;
   Blockly.Xml.domToWorkspace(dom, workspace);
 }
 

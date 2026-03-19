@@ -6,10 +6,10 @@ Blockly.Blocks['bird_gravity'] = {
     this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 set gravity to');
     this.appendDummyInput().appendField('(1 = floaty, 20 = heavy)');
     this.setColour('#e6a817');
-    this.setTooltip('Controls how fast the bird falls. Low = floaty, High = heavy.');
+    this.setTooltip('Controls how fast the bird falls.');
   },
 };
-javascriptGenerator.forBlock['bird_gravity'] = function (block, generator) {
+javascriptGenerator.forBlock['bird_gravity'] = (block, generator) => {
   const val = generator.valueToCode(block, 'VALUE', Order.ATOMIC) || '8';
   return `window.GAME_CONFIG.gravity = ${val};\n`;
 };
@@ -19,10 +19,10 @@ Blockly.Blocks['bird_jump'] = {
     this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 set jump strength to');
     this.appendDummyInput().appendField('(1 = weak, 20 = super jump)');
     this.setColour('#e6a817');
-    this.setTooltip('How high the bird jumps when you click or press space.');
+    this.setTooltip('How high the bird jumps on click/space.');
   },
 };
-javascriptGenerator.forBlock['bird_jump'] = function (block, generator) {
+javascriptGenerator.forBlock['bird_jump'] = (block, generator) => {
   const val = generator.valueToCode(block, 'VALUE', Order.ATOMIC) || '12';
   return `window.GAME_CONFIG.jumpForce = ${val};\n`;
 };
@@ -35,7 +35,7 @@ Blockly.Blocks['bird_size'] = {
     this.setTooltip('Size of the bird in pixels.');
   },
 };
-javascriptGenerator.forBlock['bird_size'] = function (block, generator) {
+javascriptGenerator.forBlock['bird_size'] = (block, generator) => {
   const val = generator.valueToCode(block, 'VALUE', Order.ATOMIC) || '20';
   return `window.GAME_CONFIG.birdSize = ${val};\n`;
 };

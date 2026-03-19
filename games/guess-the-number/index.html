@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>Guess the Number</title>
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <a href="/"
+         class="back-link">&#9664;</a>
+      <span>GUESS</span>THE NUMBER
+    </div>
+    <div class="tagline">CONFIGURE THE RULES. PLAY YOUR GAME.</div>
+    <button class="run-btn"
+            id="runBtn">&#9654; RUN GAME</button>
+  </header>
+
+  <div class="main">
+    <!-- GAME PANEL -->
+    <div class="game-panel">
+      <div class="panel-label">&#9672; GAME SCREEN &#9672;</div>
+      <canvas id="gameCanvas"
+              width="360"
+              height="420"></canvas>
+      <div class="game-info">
+        <div class="stat-box">
+          <div class="stat-label">ATTEMPTS</div>
+          <div class="stat-val"
+               id="attemptsDisplay">-</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">RANGE</div>
+          <div class="stat-val"
+               id="rangeDisplay">-</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">BEST</div>
+          <div class="stat-val"
+               id="bestDisplay">-</div>
+        </div>
+      </div>
+      <div class="hint"
+           id="hintText">&#9654; PRESS RUN GAME TO START</div>
+    </div>
+
+    <!-- CODE PANEL -->
+    <div class="code-panel">
+      <div class="code-tabs">
+        <button class="tab active"
+                id="tabBlocks">&#129513; BLOCKS</button>
+        <button class="tab"
+                id="tabCode">{ } GENERATED CODE</button>
+      </div>
+      <div id="blocklyDiv"></div>
+      <div id="generatedCode"
+           class="generated-code-panel">
+        <pre id="codeOutput"></pre>
+      </div>
+    </div>
+  </div>
+
+  <script type="module"
+          src="./main.js"></script>
+</body>
+
+</html>

@@ -255,3 +255,109 @@ header::after {
   margin-right: 8px;
   vertical-align: middle;
 }
+
+/* ── SELECTION SCREEN ── */
+body.selection-page {
+  height: auto;
+  min-height: 100vh;
+  overflow: auto;
+}
+
+.selection-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 24px;
+  gap: 32px;
+}
+
+.selection-title {
+  font-size: 14px;
+  color: var(--accent);
+  text-shadow: 3px 3px 0 var(--accent2);
+  letter-spacing: 4px;
+  text-align: center;
+}
+
+.selection-sub {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: var(--dim);
+  text-align: center;
+}
+
+.game-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  max-width: 900px;
+}
+
+.game-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 220px;
+  padding: 24px 16px;
+  background: var(--panel);
+  border: 4px solid var(--border);
+  box-shadow: 6px 6px 0 var(--border);
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.06s, box-shadow 0.06s;
+  cursor: pointer;
+}
+
+.game-card:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--border);
+  border-color: var(--card-color, var(--accent));
+}
+
+.game-card:active {
+  transform: translate(6px, 6px);
+  box-shadow: 0 0 0 var(--border);
+}
+
+.game-card-icon {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.game-card-title {
+  font-size: 11px;
+  color: var(--card-color, var(--accent));
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.game-card-desc {
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  color: var(--dim);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.game-card-play {
+  font-size: 8px;
+  color: var(--green);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ── BACK LINK (in game page headers) ── */
+.back-link {
+  color: var(--dim);
+  text-decoration: none;
+  font-size: 12px;
+  margin-right: 8px;
+  transition: color 0.1s;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}

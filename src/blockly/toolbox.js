@@ -69,19 +69,19 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="game_lives" x="30" y="350">
     <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value>
   </block>
-  <block type="pipe_interval" x="280" y="30">
+  <block type="pipe_interval" x="500" y="70">
     <value name="VALUE"><block type="math_number"><field name="NUM">90</field></block></value>
   </block>
-  <block type="theme_sky" x="280" y="110">
+  <block type="theme_sky" x="500" y="150">
     <field name="COLOR">#1a1a4e</field>
   </block>
-  <block type="theme_bird_color" x="280" y="190">
+  <block type="theme_bird_color" x="500" y="230">
     <field name="COLOR">#ffdd00</field>
   </block>
-  <block type="theme_pipe_color" x="280" y="270">
+  <block type="theme_pipe_color" x="500" y="300">
     <field name="COLOR">#39ff14</field>
   </block>
-  <block type="game_collision" x="280" y="350">
+  <block type="game_collision" x="500" y="390">
     <field name="ACTION">bounce</field>
   </block>
 </xml>`;
