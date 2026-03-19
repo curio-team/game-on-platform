@@ -1,0 +1,20 @@
+{
+  "name": "game-on-platform",
+  "version": "0.1.0",
+  "description": "An interactive coding platform where players play games and build/tweak them using puzzle blocks",
+  "license": "MIT",
+  "author": "luttje",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@blockly/field-colour": "^6.0.0",
+    "blockly": "^12.0.0"
+  },
+  "devDependencies": {
+    "vite": "^8.0.1"
+  }
+}
