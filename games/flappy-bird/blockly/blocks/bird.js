@@ -3,10 +3,10 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 
 Blockly.Blocks['bird_gravity'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 set gravity to');
-    this.appendDummyInput().appendField('(1 = floaty, 20 = heavy)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 zet zwaartekracht op');
+    this.appendDummyInput().appendField('(1 = licht, 20 = zwaar)');
     this.setColour('#e6a817');
-    this.setTooltip('Controls how fast the bird falls.');
+    this.setTooltip('Bepaalt hoe snel de vogel valt.');
   },
 };
 javascriptGenerator.forBlock['bird_gravity'] = (block, generator) => {
@@ -16,10 +16,10 @@ javascriptGenerator.forBlock['bird_gravity'] = (block, generator) => {
 
 Blockly.Blocks['bird_jump'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 set jump strength to');
-    this.appendDummyInput().appendField('(1 = weak, 20 = super jump)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 zet sprongkracht op');
+    this.appendDummyInput().appendField('(1 = zwak, 20 = supersprong)');
     this.setColour('#e6a817');
-    this.setTooltip('How high the bird jumps on click/space.');
+    this.setTooltip('Hoe hoog de vogel springt bij klik/spatie.');
   },
 };
 javascriptGenerator.forBlock['bird_jump'] = (block, generator) => {
@@ -29,10 +29,10 @@ javascriptGenerator.forBlock['bird_jump'] = (block, generator) => {
 
 Blockly.Blocks['bird_size'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 set bird size to');
-    this.appendDummyInput().appendField('(pixels, default 20)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🐦 zet vogelgrootte op');
+    this.appendDummyInput().appendField('(pixels, standaard 20)');
     this.setColour('#e6a817');
-    this.setTooltip('Size of the bird in pixels.');
+    this.setTooltip('Grootte van de vogel in pixels.');
   },
 };
 javascriptGenerator.forBlock['bird_size'] = (block, generator) => {

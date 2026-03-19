@@ -108,12 +108,12 @@ function drawHUD() {
 function drawGameOverOverlay() {
   ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.font = '20px "Press Start 2P"'; ctx.fillStyle = '#ff2244'; ctx.textAlign = 'center';
-  ctx.fillText('GAME OVER', canvas.width / 2, canvas.height / 2 - 30);
+  ctx.fillText('SPEL VOORBIJ', canvas.width / 2, canvas.height / 2 - 30);
   ctx.font = '10px "Press Start 2P"'; ctx.fillStyle = '#ffdd00';
   ctx.fillText(`SCORE: ${game.score}`, canvas.width / 2, canvas.height / 2 + 10);
-  ctx.fillText(`BEST: ${game.best}`, canvas.width / 2, canvas.height / 2 + 35);
+  ctx.fillText(`BESTE: ${game.best}`, canvas.width / 2, canvas.height / 2 + 35);
   ctx.fillStyle = '#39ff14';
-  ctx.fillText('CLICK TO RETRY', canvas.width / 2, canvas.height / 2 + 70);
+  ctx.fillText('KLIK OM OPNIEUW TE PROBEREN', canvas.width / 2, canvas.height / 2 + 70);
   ctx.textAlign = 'left';
 }
 
@@ -123,8 +123,8 @@ export function drawIdleScreen() {
   ctx.font = '14px "Press Start 2P"'; ctx.fillStyle = '#ffdd00'; ctx.textAlign = 'center';
   ctx.fillText('CODEBIRD', canvas.width / 2, canvas.height / 2 - 40);
   ctx.font = '8px "Press Start 2P"'; ctx.fillStyle = '#e0e0ff';
-  ctx.fillText('SET YOUR BLOCKS', canvas.width / 2, canvas.height / 2 + 10);
-  ctx.fillText('THEN PRESS RUN GAME', canvas.width / 2, canvas.height / 2 + 35);
+  ctx.fillText('STEL JE BLOKKEN IN', canvas.width / 2, canvas.height / 2 + 10);
+  ctx.fillText('DRUK DAN OP START SPEL', canvas.width / 2, canvas.height / 2 + 35);
   ctx.textAlign = 'left';
 }
 
@@ -152,8 +152,8 @@ function handleCollision() {
 export function triggerGameOver() {
   game.running = false;
   game.state = 'gameover';
-  document.getElementById('hintText').textContent = 'CLICK CANVAS TO RESTART';
-  document.getElementById('runBtn').textContent = '▶ RUN GAME';
+  document.getElementById('hintText').textContent = 'KLIK OP CANVAS OM OPNIEUW TE STARTEN';
+  document.getElementById('runBtn').textContent = '▶ START SPEL';
   document.getElementById('runBtn').classList.remove('running');
   drawBackground();
   for (const p of game.pipes) drawPipe(p);

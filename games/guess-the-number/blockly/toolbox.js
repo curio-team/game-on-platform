@@ -2,7 +2,7 @@ export const toolboxConfig = {
   kind: 'categoryToolbox',
   contents: [
     {
-      kind: 'category', name: '🔢 Number Setup', colour: '#7b5ea7', contents: [
+      kind: 'category', name: '🔢 Getalinstelling', colour: '#7b5ea7', contents: [
         { kind: 'block', type: 'guess_range' },
         { kind: 'block', type: 'guess_attempts' },
       ]
@@ -13,13 +13,13 @@ export const toolboxConfig = {
       ]
     },
     {
-      kind: 'category', name: '🎨 Visual Theme', colour: '#5ea765', contents: [
+      kind: 'category', name: '🎨 Visueel Thema', colour: '#5ea765', contents: [
         { kind: 'block', type: 'guess_bg_color' },
         { kind: 'block', type: 'guess_accent_color' },
       ]
     },
     {
-      kind: 'category', name: '🔢 Numbers', colour: '#888', contents: [
+      kind: 'category', name: '🔢 Getallen', colour: '#888', contents: [
         { kind: 'block', type: 'math_number', fields: { NUM: 50 } },
       ]
     },

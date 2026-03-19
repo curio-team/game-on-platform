@@ -4,11 +4,11 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 // ── Statement: game over ──────────────────────────────────────────────────────
 Blockly.Blocks['game_game_over'] = {
   init() {
-    this.appendDummyInput().appendField('💀 trigger game over');
+    this.appendDummyInput().appendField('💀 activeer spel voorbij');
     this.setPreviousStatement(true, null);
     this.setNextStatement(false); // terminal block — nothing runs after this
     this.setColour('#7b5ea7');
-    this.setTooltip('Ends the game immediately and shows the game-over screen.');
+    this.setTooltip('Beeindigt het spel direct en toont het scherm spel voorbij.');
   },
 };
 javascriptGenerator.forBlock['game_game_over'] = () => `window.__game.over();\n`;
@@ -16,11 +16,11 @@ javascriptGenerator.forBlock['game_game_over'] = () => `window.__game.over();\n`
 // ── Statement: lose a life ────────────────────────────────────────────────────
 Blockly.Blocks['game_lose_life'] = {
   init() {
-    this.appendDummyInput().appendField('❤️ lose a life');
+    this.appendDummyInput().appendField('❤️ verlies een leven');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#7b5ea7');
-    this.setTooltip('Subtracts one life and makes the bird briefly invincible. Triggers game over when lives reach zero.');
+    this.setTooltip('Trekt een leven af en maakt de vogel kort onkwetsbaar. Activeert spel voorbij als levens nul zijn.');
   },
 };
 javascriptGenerator.forBlock['game_lose_life'] = () => `window.__game.loseLife();\n`;
@@ -28,11 +28,11 @@ javascriptGenerator.forBlock['game_lose_life'] = () => `window.__game.loseLife()
 // ── Statement: set lives ──────────────────────────────────────────────────────
 Blockly.Blocks['game_set_lives'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('❤️ set lives to');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('❤️ zet levens op');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#7b5ea7');
-    this.setTooltip('Set the starting number of lives. Put this inside "When game starts".');
+    this.setTooltip('Stel het startaantal levens in. Zet dit in "Wanneer het spel start".');
   },
 };
 javascriptGenerator.forBlock['game_set_lives'] = (block, generator) => {
@@ -43,12 +43,12 @@ javascriptGenerator.forBlock['game_set_lives'] = (block, generator) => {
 // ── Statement: add to score ───────────────────────────────────────────────────
 Blockly.Blocks['game_add_score'] = {
   init() {
-    this.appendValueInput('AMOUNT').setCheck('Number').appendField('🏆 add');
-    this.appendDummyInput().appendField('to score');
+    this.appendValueInput('AMOUNT').setCheck('Number').appendField('🏆 voeg');
+    this.appendDummyInput().appendField('toe aan score');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#7b5ea7');
-    this.setTooltip('Add bonus points to the score. (The score already increases automatically when passing pipes.)');
+    this.setTooltip('Voeg bonuspunten toe aan de score. (De score stijgt al automatisch bij pijpen passeren.)');
   },
 };
 javascriptGenerator.forBlock['game_add_score'] = (block, generator) => {
@@ -62,7 +62,7 @@ Blockly.Blocks['game_get_score'] = {
     this.appendDummyInput().appendField('🏆 score');
     this.setOutput(true, 'Number');
     this.setColour('#7b5ea7');
-    this.setTooltip('The current score.');
+    this.setTooltip('De huidige score.');
   },
 };
 javascriptGenerator.forBlock['game_get_score'] = () => [`window.__game.getScore()`, Order.FUNCTION_CALL];
@@ -70,10 +70,10 @@ javascriptGenerator.forBlock['game_get_score'] = () => [`window.__game.getScore(
 // ── Value: lives ──────────────────────────────────────────────────────────────
 Blockly.Blocks['game_get_lives'] = {
   init() {
-    this.appendDummyInput().appendField('❤️ lives remaining');
+    this.appendDummyInput().appendField('❤️ levens over');
     this.setOutput(true, 'Number');
     this.setColour('#7b5ea7');
-    this.setTooltip('The number of lives the player has left.');
+    this.setTooltip('Het aantal levens dat de speler nog heeft.');
   },
 };
 javascriptGenerator.forBlock['game_get_lives'] = () => [`window.__game.getLives()`, Order.FUNCTION_CALL];
@@ -81,11 +81,11 @@ javascriptGenerator.forBlock['game_get_lives'] = () => [`window.__game.getLives(
 // ── Statement: spark effect ───────────────────────────────────────────────────
 Blockly.Blocks['game_spark_effect'] = {
   init() {
-    this.appendDummyInput().appendField('✨ spark effect at bird');
+    this.appendDummyInput().appendField('✨ vonkeffect bij vogel');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#7b5ea7');
-    this.setTooltip('Bursts a shower of particles around the bird. Fun for celebrations!');
+    this.setTooltip('Laat een wolk deeltjes rond de vogel ontploffen. Leuk voor vieringen!');
   },
 };
 javascriptGenerator.forBlock['game_spark_effect'] = () => `window.__game.spawnParticles();\n`;
@@ -93,10 +93,10 @@ javascriptGenerator.forBlock['game_spark_effect'] = () => `window.__game.spawnPa
 // ── Value: frame number ───────────────────────────────────────────────────────
 Blockly.Blocks['game_get_frame'] = {
   init() {
-    this.appendDummyInput().appendField('⏱️ frame number');
+    this.appendDummyInput().appendField('⏱️ framenummer');
     this.setOutput(true, 'Number');
     this.setColour('#e6a817');
-    this.setTooltip('How many frames have passed since the game started. 60 frames ≈ 1 second.');
+    this.setTooltip('Hoeveel frames er zijn verstreken sinds de start. 60 frames ~= 1 seconde.');
   },
 };
 javascriptGenerator.forBlock['game_get_frame'] = () => [`window.__game.getFrame()`, Order.FUNCTION_CALL];
@@ -104,13 +104,13 @@ javascriptGenerator.forBlock['game_get_frame'] = () => [`window.__game.getFrame(
 // ── Statement: every N frames ─────────────────────────────────────────────────
 Blockly.Blocks['game_every_n_frames'] = {
   init() {
-    this.appendValueInput('FRAMES').setCheck('Number').appendField('⏱️ every');
+    this.appendValueInput('FRAMES').setCheck('Number').appendField('⏱️ elke');
     this.appendDummyInput().appendField('frames:');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#e6a817');
-    this.setTooltip('Runs the inner blocks once every N game frames. 90 frames ≈ 1.5 seconds. Use this to spawn pipes.');
+    this.setTooltip('Draait de binnenste blokken een keer elke N game frames. 90 frames ~= 1.5 seconde. Gebruik dit om pijpen te spawnen.');
   },
 };
 javascriptGenerator.forBlock['game_every_n_frames'] = (block, generator) => {

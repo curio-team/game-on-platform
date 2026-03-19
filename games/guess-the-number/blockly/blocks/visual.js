@@ -5,10 +5,10 @@ import { javascriptGenerator } from 'blockly/javascript';
 Blockly.Blocks['guess_bg_color'] = {
   init() {
     this.appendDummyInput()
-      .appendField('🎨 background color')
+      .appendField('🎨 achtergrondkleur')
       .appendField(new FieldColour('#0d0d2a'), 'COLOR');
     this.setColour('#5ea765');
-    this.setTooltip('Background colour of the game screen.');
+    this.setTooltip('Achtergrondkleur van het spelscherm.');
   },
 };
 javascriptGenerator.forBlock['guess_bg_color'] = (block) =>
@@ -17,10 +17,10 @@ javascriptGenerator.forBlock['guess_bg_color'] = (block) =>
 Blockly.Blocks['guess_accent_color'] = {
   init() {
     this.appendDummyInput()
-      .appendField('🎨 accent color')
+      .appendField('🎨 accentkleur')
       .appendField(new FieldColour('#ffdd00'), 'COLOR');
     this.setColour('#5ea765');
-    this.setTooltip('Colour used for buttons, text and highlights.');
+    this.setTooltip('Kleur voor knoppen, tekst en accenten.');
   },
 };
 javascriptGenerator.forBlock['guess_accent_color'] = (block) =>

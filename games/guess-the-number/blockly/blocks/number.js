@@ -3,10 +3,10 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 
 Blockly.Blocks['guess_range'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🔢 number range: 1 to');
-    this.appendDummyInput().appendField('(10 = easy, 1000 = hard)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🔢 getalbereik: 1 tot');
+    this.appendDummyInput().appendField('(10 = makkelijk, 1000 = moeilijk)');
     this.setColour('#7b5ea7');
-    this.setTooltip('The secret number will be picked from 1 up to this value.');
+    this.setTooltip('Het geheime getal wordt gekozen van 1 tot en met deze waarde.');
   },
 };
 javascriptGenerator.forBlock['guess_range'] = (block, generator) => {
@@ -16,10 +16,10 @@ javascriptGenerator.forBlock['guess_range'] = (block, generator) => {
 
 Blockly.Blocks['guess_attempts'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🎮 max guesses');
-    this.appendDummyInput().appendField('(3 = brutal, 20 = easy)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🎮 maximale pogingen');
+    this.appendDummyInput().appendField('(3 = pittig, 20 = makkelijk)');
     this.setColour('#7b5ea7');
-    this.setTooltip('How many guesses the player gets before losing.');
+    this.setTooltip('Hoeveel pogingen de speler krijgt voordat die verliest.');
   },
 };
 javascriptGenerator.forBlock['guess_attempts'] = (block, generator) => {

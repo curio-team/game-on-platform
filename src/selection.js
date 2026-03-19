@@ -12,7 +12,7 @@ for (const g of games) {
     <div class="game-card-icon">${g.icon}</div>
     <div class="game-card-title">${g.title}</div>
     <div class="game-card-desc">${g.description}</div>
-    <div class="game-card-play">▶ PLAY &amp; CODE</div>
+    <div class="game-card-play">▶ SPEEL &amp; CODEER</div>
   `;
   container.appendChild(card);
 }

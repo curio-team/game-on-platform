@@ -34,5 +34,5 @@ initPlatform({
   canRestart: () => game.state === 'won' || game.state === 'gameover' || game.state === 'idle',
 
   // ── UI ────────────────────────────────────────────────────────────────────
-  runningHint: '◄ ► to adjust guess  |  SPACE to submit',
+  runningHint: '◄ ► om gok aan te passen  |  SPATIE om te bevestigen',
 });

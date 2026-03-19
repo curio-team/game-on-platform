@@ -20,7 +20,7 @@ export function showTab(tab) {
     try {
       const code = javascriptGenerator.workspaceToCode(getWorkspace());
       document.getElementById('codeOutput').innerHTML =
-        `<span class="code-comment">// YOUR GAME PROGRAM\n// This code is generated from your blocks!\n\n</span>` +
+        `<span class="code-comment">// JOUW SPELPROGRAMMA\n// Deze code is gegenereerd uit je blokken!\n\n</span>` +
         formatCode(code);
     } catch {
       // ignore generation errors in preview

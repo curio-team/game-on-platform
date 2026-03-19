@@ -2,7 +2,7 @@ export const toolboxConfig = {
   kind: 'categoryToolbox',
   contents: [
     {
-      kind: 'category', name: '🎮 Events', colour: '#e63946', contents: [
+      kind: 'category', name: '🎮 Gebeurtenissen', colour: '#e63946', contents: [
         { kind: 'block', type: 'event_every_frame' },
         { kind: 'block', type: 'event_on_flap' },
         { kind: 'block', type: 'event_game_start' },
@@ -10,7 +10,7 @@ export const toolboxConfig = {
       ],
     },
     {
-      kind: 'category', name: '🐦 Bird', colour: '#e6a817', contents: [
+      kind: 'category', name: '🐦 Vogel', colour: '#e6a817', contents: [
         {
           kind: 'block', type: 'bird_apply_gravity',
           inputs: { AMOUNT: { shadow: { type: 'math_number', fields: { NUM: 1.2 } } } },
@@ -42,7 +42,7 @@ export const toolboxConfig = {
       ],
     },
     {
-      kind: 'category', name: '🏆 Game', colour: '#7b5ea7', contents: [
+      kind: 'category', name: '🏆 Spel', colour: '#7b5ea7', contents: [
         { kind: 'block', type: 'game_game_over' },
         { kind: 'block', type: 'game_lose_life' },
         {
@@ -68,14 +68,14 @@ export const toolboxConfig = {
       ],
     },
     {
-      kind: 'category', name: '🎨 Theme', colour: '#5ea765', contents: [
+      kind: 'category', name: '🎨 Thema', colour: '#5ea765', contents: [
         { kind: 'block', type: 'theme_sky' },
         { kind: 'block', type: 'theme_bird_color' },
         { kind: 'block', type: 'theme_pipe_color' },
       ],
     },
     {
-      kind: 'category', name: '✅ Logic', colour: '#5b80a5', contents: [
+      kind: 'category', name: '✅ Logica', colour: '#5b80a5', contents: [
         { kind: 'block', type: 'controls_if' },
         { kind: 'block', type: 'logic_compare' },
         { kind: 'block', type: 'logic_operation' },
@@ -84,7 +84,7 @@ export const toolboxConfig = {
       ],
     },
     {
-      kind: 'category', name: '🔢 Math', colour: '#5b67a5', contents: [
+      kind: 'category', name: '🔢 Rekenen', colour: '#5b67a5', contents: [
         { kind: 'block', type: 'math_number', fields: { NUM: 10 } },
         { kind: 'block', type: 'math_arithmetic' },
         { kind: 'block', type: 'math_single' },
@@ -93,7 +93,7 @@ export const toolboxConfig = {
       ],
     },
     {
-      kind: 'category', name: '📦 Variables', colour: '#a55b5b', custom: 'VARIABLE',
+      kind: 'category', name: '📦 Variabelen', colour: '#a55b5b', custom: 'VARIABLE',
     },
   ],
 };

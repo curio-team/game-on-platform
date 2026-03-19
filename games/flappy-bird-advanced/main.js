@@ -34,5 +34,5 @@ initPlatform({
   canRestart: () => game.state === 'gameover' || game.state === 'idle',
 
   // ── UI ────────────────────────────────────────────────────────────────────
-  runningHint: 'CLICK or SPACE to flap!',
+  runningHint: 'KLIK of SPATIE om te flapperen!',
 });

@@ -2,7 +2,7 @@ export const toolboxConfig = {
   kind: 'categoryToolbox',
   contents: [
     {
-      kind: 'category', name: '🐦 Bird Physics', colour: '#e6a817', contents: [
+      kind: 'category', name: '🐦 Vogel-fysica', colour: '#e6a817', contents: [
         { kind: 'block', type: 'bird_gravity' },
         { kind: 'block', type: 'bird_jump' },
         { kind: 'block', type: 'bird_size' },
@@ -16,20 +16,20 @@ export const toolboxConfig = {
       ]
     },
     {
-      kind: 'category', name: '🎮 Game Rules', colour: '#7b5ea7', contents: [
+      kind: 'category', name: '🎮 Spelregels', colour: '#7b5ea7', contents: [
         { kind: 'block', type: 'game_lives' },
         { kind: 'block', type: 'game_collision' },
       ]
     },
     {
-      kind: 'category', name: '🎨 Visual Theme', colour: '#5ea765', contents: [
+      kind: 'category', name: '🎨 Visueel Thema', colour: '#5ea765', contents: [
         { kind: 'block', type: 'theme_sky' },
         { kind: 'block', type: 'theme_bird_color' },
         { kind: 'block', type: 'theme_pipe_color' },
       ]
     },
     {
-      kind: 'category', name: '🔢 Numbers', colour: '#888', contents: [
+      kind: 'category', name: '🔢 Getallen', colour: '#888', contents: [
         { kind: 'block', type: 'math_number', fields: { NUM: 5 } },
       ]
     },

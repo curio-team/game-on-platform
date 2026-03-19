@@ -46,14 +46,14 @@ export function initPlatform(gamePlugin) {
 
     document.getElementById('runBtn').textContent = '⏹ STOP';
     document.getElementById('runBtn').classList.add('running');
-    document.getElementById('hintText').textContent = gamePlugin.runningHint || 'GAME IS RUNNING';
+    document.getElementById('hintText').textContent = gamePlugin.runningHint || 'SPEL IS BEZIG';
   }
 
   function stopGame() {
     gamePlugin.stopGame();
-    document.getElementById('runBtn').textContent = '▶ RUN GAME';
+    document.getElementById('runBtn').textContent = '▶ START SPEL';
     document.getElementById('runBtn').classList.remove('running');
-    document.getElementById('hintText').textContent = '▶ PRESS RUN GAME TO START';
+    document.getElementById('hintText').textContent = '▶ DRUK OP START SPEL OM TE BEGINNEN';
   }
 
   window.addEventListener('load', () => {

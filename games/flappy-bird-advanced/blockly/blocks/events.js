@@ -4,12 +4,12 @@ import { javascriptGenerator } from 'blockly/javascript';
 // ── Hat block: Every game frame ───────────────────────────────────────────────
 Blockly.Blocks['event_every_frame'] = {
   init() {
-    this.appendDummyInput().appendField('🎮 Every game frame:');
+    this.appendDummyInput().appendField('🎮 Elke spelframe:');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Code inside here runs every frame (~60× per second). Apply gravity, check collisions, and spawn pipes here.');
+    this.setTooltip('Code hierin draait elke frame (~60x per seconde). Pas zwaartekracht toe, controleer botsingen en spawn pijpen hier.');
   },
 };
 javascriptGenerator.forBlock['event_every_frame'] = (block, generator) => {
@@ -20,12 +20,12 @@ javascriptGenerator.forBlock['event_every_frame'] = (block, generator) => {
 // ── Hat block: When player taps / clicks ─────────────────────────────────────
 Blockly.Blocks['event_on_flap'] = {
   init() {
-    this.appendDummyInput().appendField('👆 When player taps / clicks:');
+    this.appendDummyInput().appendField('👆 Wanneer speler tikt / klikt:');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Runs when the player clicks the canvas or presses Space. Make the bird flap here!');
+    this.setTooltip('Draait wanneer de speler op het canvas klikt of op Spatie drukt. Laat de vogel hier flapperen!');
   },
 };
 javascriptGenerator.forBlock['event_on_flap'] = (block, generator) => {
@@ -36,12 +36,12 @@ javascriptGenerator.forBlock['event_on_flap'] = (block, generator) => {
 // ── Hat block: When game starts ───────────────────────────────────────────────
 Blockly.Blocks['event_game_start'] = {
   init() {
-    this.appendDummyInput().appendField('🚀 When game starts:');
+    this.appendDummyInput().appendField('🚀 Wanneer het spel start:');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Runs once when the game launches. Set lives, pipe speed, colors, etc. here.');
+    this.setTooltip('Draait een keer wanneer het spel start. Zet levens, pijpsnelheid, kleuren enz. hier.');
   },
 };
 javascriptGenerator.forBlock['event_game_start'] = (block, generator) => {
@@ -52,12 +52,12 @@ javascriptGenerator.forBlock['event_game_start'] = (block, generator) => {
 // ── Hat block: When a pipe is passed ─────────────────────────────────────────
 Blockly.Blocks['event_on_score'] = {
   init() {
-    this.appendDummyInput().appendField('🏆 When a pipe is passed:');
+    this.appendDummyInput().appendField('🏆 Wanneer een pijp is gepasseerd:');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Runs automatically each time the bird successfully passes through a pipe gap.');
+    this.setTooltip('Draait automatisch telkens als de vogel succesvol door een pijpopening gaat.');
   },
 };
 javascriptGenerator.forBlock['event_on_score'] = (block, generator) => {

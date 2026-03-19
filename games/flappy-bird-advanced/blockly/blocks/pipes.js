@@ -4,11 +4,11 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 // ── Statement: spawn a pipe ───────────────────────────────────────────────────
 Blockly.Blocks['pipe_spawn_now'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ spawn a new pipe');
+    this.appendDummyInput().appendField('🏗️ maak een nieuwe pijp');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Creates a new pipe pair at the right edge of the screen. Use inside "every N frames" to control frequency.');
+    this.setTooltip('Maakt een nieuw pijppaar aan aan de rechterrand van het scherm. Gebruik in "elke N frames" om de frequentie te regelen.');
   },
 };
 javascriptGenerator.forBlock['pipe_spawn_now'] = () => `window.__pipes.spawn();\n`;
@@ -16,12 +16,12 @@ javascriptGenerator.forBlock['pipe_spawn_now'] = () => `window.__pipes.spawn();\
 // ── Statement: set pipe speed ─────────────────────────────────────────────────
 Blockly.Blocks['pipe_set_speed'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ set pipe speed to');
-    this.appendDummyInput().appendField('pixels/frame (try 3)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet pijpsnelheid op');
+    this.appendDummyInput().appendField('pixels/frame (probeer 3)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('How fast pipes scroll left. Higher = harder. Safe range: 1–10.');
+    this.setTooltip('Hoe snel pijpen naar links schuiven. Hoger = moeilijker. Veilig bereik: 1-10.');
   },
 };
 javascriptGenerator.forBlock['pipe_set_speed'] = (block, generator) => {
@@ -32,12 +32,12 @@ javascriptGenerator.forBlock['pipe_set_speed'] = (block, generator) => {
 // ── Statement: set pipe gap ───────────────────────────────────────────────────
 Blockly.Blocks['pipe_set_gap'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ set pipe gap to');
-    this.appendDummyInput().appendField('pixels (80=hard, 200=easy)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet pijpopening op');
+    this.appendDummyInput().appendField('pixels (80=moeilijk, 200=makkelijk)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('The vertical opening between the top and bottom pipe. Smaller = harder to fit through.');
+    this.setTooltip('De verticale opening tussen de bovenste en onderste pijp. Kleiner = lastiger om door te passen.');
   },
 };
 javascriptGenerator.forBlock['pipe_set_gap'] = (block, generator) => {
@@ -48,10 +48,10 @@ javascriptGenerator.forBlock['pipe_set_gap'] = (block, generator) => {
 // ── Value: nearest pipe X ─────────────────────────────────────────────────────
 Blockly.Blocks['nearest_pipe_x'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ nearest pipe X');
+    this.appendDummyInput().appendField('🏗️ dichtstbijzijnde pijp X');
     this.setOutput(true, 'Number');
     this.setColour('#4a90d9');
-    this.setTooltip('X position of the left edge of the nearest upcoming pipe. Useful for auto-pilot logic!');
+    this.setTooltip('X-positie van de linkerrand van de dichtstbijzijnde aankomende pijp. Handig voor autopilot-logica!');
   },
 };
 javascriptGenerator.forBlock['nearest_pipe_x'] = () => [`window.__pipes.getNearestX()`, Order.FUNCTION_CALL];
@@ -59,10 +59,10 @@ javascriptGenerator.forBlock['nearest_pipe_x'] = () => [`window.__pipes.getNeare
 // ── Value: nearest pipe gap top ───────────────────────────────────────────────
 Blockly.Blocks['nearest_pipe_gap_top'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ nearest pipe gap top Y');
+    this.appendDummyInput().appendField('🏗️ bovenkant opening dichtste pijp Y');
     this.setOutput(true, 'Number');
     this.setColour('#4a90d9');
-    this.setTooltip('Y position of the top of the opening in the nearest pipe.');
+    this.setTooltip('Y-positie van de bovenkant van de opening in de dichtstbijzijnde pijp.');
   },
 };
 javascriptGenerator.forBlock['nearest_pipe_gap_top'] = () => [`window.__pipes.getGapTop()`, Order.FUNCTION_CALL];
@@ -70,10 +70,10 @@ javascriptGenerator.forBlock['nearest_pipe_gap_top'] = () => [`window.__pipes.ge
 // ── Value: nearest pipe gap bottom ───────────────────────────────────────────
 Blockly.Blocks['nearest_pipe_gap_bottom'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ nearest pipe gap bottom Y');
+    this.appendDummyInput().appendField('🏗️ onderkant opening dichtste pijp Y');
     this.setOutput(true, 'Number');
     this.setColour('#4a90d9');
-    this.setTooltip('Y position of the bottom of the opening in the nearest pipe.');
+    this.setTooltip('Y-positie van de onderkant van de opening in de dichtstbijzijnde pijp.');
   },
 };
 javascriptGenerator.forBlock['nearest_pipe_gap_bottom'] = () => [`window.__pipes.getGapBottom()`, Order.FUNCTION_CALL];

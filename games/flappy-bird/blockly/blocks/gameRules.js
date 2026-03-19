@@ -3,8 +3,8 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 
 Blockly.Blocks['game_lives'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🎮 starting lives');
-    this.appendDummyInput().appendField('(1 = one chance, 5 = forgiving)');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🎮 startlevens');
+    this.appendDummyInput().appendField('(1 = een kans, 5 = vergevingsgezind)');
     this.setColour('#7b5ea7');
   },
 };
@@ -16,11 +16,11 @@ javascriptGenerator.forBlock['game_lives'] = (block, generator) => {
 Blockly.Blocks['game_collision'] = {
   init() {
     this.appendDummyInput()
-      .appendField('🎮 on collision:')
+      .appendField('🎮 bij botsing:')
       .appendField(new Blockly.FieldDropdown([
-        ['bounce back 🏀', 'bounce'],
-        ['lose a life ❤️', 'life'],
-        ['game over 💀', 'gameover'],
+        ['stuiter terug 🏀', 'bounce'],
+        ['verlies een leven ❤️', 'life'],
+        ['spel voorbij 💀', 'gameover'],
       ]), 'ACTION');
     this.setColour('#7b5ea7');
   },

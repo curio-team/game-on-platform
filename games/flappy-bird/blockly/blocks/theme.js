@@ -4,7 +4,7 @@ import { javascriptGenerator } from 'blockly/javascript';
 
 Blockly.Blocks['theme_sky'] = {
   init() {
-    this.appendDummyInput().appendField('🎨 sky color').appendField(new FieldColour('#1a1a4e'), 'COLOR');
+    this.appendDummyInput().appendField('🎨 luchtkleur').appendField(new FieldColour('#1a1a4e'), 'COLOR');
     this.setColour('#5ea765');
   },
 };
@@ -13,7 +13,7 @@ javascriptGenerator.forBlock['theme_sky'] = (block) =>
 
 Blockly.Blocks['theme_bird_color'] = {
   init() {
-    this.appendDummyInput().appendField('🎨 bird color').appendField(new FieldColour('#ffdd00'), 'COLOR');
+    this.appendDummyInput().appendField('🎨 vogelkleur').appendField(new FieldColour('#ffdd00'), 'COLOR');
     this.setColour('#5ea765');
   },
 };
@@ -22,7 +22,7 @@ javascriptGenerator.forBlock['theme_bird_color'] = (block) =>
 
 Blockly.Blocks['theme_pipe_color'] = {
   init() {
-    this.appendDummyInput().appendField('🎨 pipe color').appendField(new FieldColour('#39ff14'), 'COLOR');
+    this.appendDummyInput().appendField('🎨 pijpkleur').appendField(new FieldColour('#39ff14'), 'COLOR');
     this.setColour('#5ea765');
   },
 };

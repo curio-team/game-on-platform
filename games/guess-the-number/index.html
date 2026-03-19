@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0">
-  <title>Guess the Number</title>
+  <title>Raad het Getal</title>
   <link rel="preconnect"
         href="https://fonts.googleapis.com">
   <link rel="preconnect"
@@ -22,46 +22,46 @@
          class="back-link">&#9664;</a>
       <span>GUESS</span>THE NUMBER
     </div>
-    <div class="tagline">CONFIGURE THE RULES. PLAY YOUR GAME.</div>
+    <div class="tagline">STEL DE REGELS IN. SPEEL JE SPEL.</div>
     <button class="run-btn"
-            id="runBtn">&#9654; RUN GAME</button>
+            id="runBtn">&#9654; START SPEL</button>
   </header>
 
   <div class="main">
     <!-- GAME PANEL -->
     <div class="game-panel">
-      <div class="panel-label">&#9672; GAME SCREEN &#9672;</div>
+      <div class="panel-label">&#9672; SPELSCHERM &#9672;</div>
       <canvas id="gameCanvas"
               width="360"
               height="420"></canvas>
       <div class="game-info">
         <div class="stat-box">
-          <div class="stat-label">ATTEMPTS</div>
+          <div class="stat-label">POGINGEN</div>
           <div class="stat-val"
                id="attemptsDisplay">-</div>
         </div>
         <div class="stat-box">
-          <div class="stat-label">RANGE</div>
+          <div class="stat-label">BEREIK</div>
           <div class="stat-val"
                id="rangeDisplay">-</div>
         </div>
         <div class="stat-box">
-          <div class="stat-label">BEST</div>
+          <div class="stat-label">BESTE</div>
           <div class="stat-val"
                id="bestDisplay">-</div>
         </div>
       </div>
       <div class="hint"
-           id="hintText">&#9654; PRESS RUN GAME TO START</div>
+           id="hintText">&#9654; DRUK OP START SPEL OM TE BEGINNEN</div>
     </div>
 
     <!-- CODE PANEL -->
     <div class="code-panel">
       <div class="code-tabs">
         <button class="tab active"
-                id="tabBlocks">&#129513; BLOCKS</button>
+                id="tabBlocks">&#129513; BLOKKEN</button>
         <button class="tab"
-                id="tabCode">{ } GENERATED CODE</button>
+                id="tabCode">{ } GEGENEREERDE CODE</button>
       </div>
       <div id="blocklyDiv"></div>
       <div id="generatedCode"

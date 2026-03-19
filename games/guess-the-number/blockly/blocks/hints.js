@@ -4,14 +4,14 @@ import { javascriptGenerator } from 'blockly/javascript';
 Blockly.Blocks['guess_hints'] = {
   init() {
     this.appendDummyInput()
-      .appendField('💡 hint style:')
+      .appendField('💡 hintstijl:')
       .appendField(new Blockly.FieldDropdown([
-        ['basic (too high / too low)', 'basic'],
-        ['temperature (hot & cold)', 'temperature'],
-        ['no hints', 'none'],
+        ['basis (te hoog / te laag)', 'basic'],
+        ['temperatuur (heet & koud)', 'temperature'],
+        ['geen hints', 'none'],
       ]), 'STYLE');
     this.setColour('#4a90d9');
-    this.setTooltip('Controls what hint is shown after each wrong guess.');
+    this.setTooltip('Bepaalt welke hint wordt getoond na elke foute gok.');
   },
 };
 javascriptGenerator.forBlock['guess_hints'] = (block) => {

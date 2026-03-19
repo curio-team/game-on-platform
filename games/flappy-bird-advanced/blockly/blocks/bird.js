@@ -4,12 +4,12 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 // ── Statement: apply gravity ──────────────────────────────────────────────────
 Blockly.Blocks['bird_apply_gravity'] = {
   init() {
-    this.appendValueInput('AMOUNT').setCheck('Number').appendField('🐦 apply gravity');
-    this.appendDummyInput().appendField('(per frame, try 1.2)');
+    this.appendValueInput('AMOUNT').setCheck('Number').appendField('🐦 pas zwaartekracht toe');
+    this.appendDummyInput().appendField('(per frame, probeer 1.2)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#e6a817');
-    this.setTooltip('Adds to the bird\'s downward speed and moves it. Higher = falls faster. Call this every frame.');
+    this.setTooltip('Voegt toe aan de daalsnelheid van de vogel en verplaatst hem. Hoger = sneller vallen. Roep dit elke frame aan.');
   },
 };
 javascriptGenerator.forBlock['bird_apply_gravity'] = (block, generator) => {
@@ -20,12 +20,12 @@ javascriptGenerator.forBlock['bird_apply_gravity'] = (block, generator) => {
 // ── Statement: flap ───────────────────────────────────────────────────────────
 Blockly.Blocks['bird_flap'] = {
   init() {
-    this.appendValueInput('FORCE').setCheck('Number').appendField('🐦 bird flap with force');
-    this.appendDummyInput().appendField('(try 12)');
+    this.appendValueInput('FORCE').setCheck('Number').appendField('🐦 vogel klapt met kracht');
+    this.appendDummyInput().appendField('(probeer 12)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#e6a817');
-    this.setTooltip('Launches the bird upward. Higher force = jumps higher. Put this inside "When player taps".');
+    this.setTooltip('Stuurt de vogel omhoog. Meer kracht = hogere sprong. Zet dit in "Wanneer speler tikt".');
   },
 };
 javascriptGenerator.forBlock['bird_flap'] = (block, generator) => {
@@ -36,10 +36,10 @@ javascriptGenerator.forBlock['bird_flap'] = (block, generator) => {
 // ── Boolean: bird hits a pipe ─────────────────────────────────────────────────
 Blockly.Blocks['bird_is_colliding'] = {
   init() {
-    this.appendDummyInput().appendField('🐦 bird hits a pipe');
+    this.appendDummyInput().appendField('🐦 vogel raakt een pijp');
     this.setOutput(true, 'Boolean');
     this.setColour('#e6a817');
-    this.setTooltip('True when the bird overlaps with any pipe. Use inside an "if" block to trigger game over or lose a life.');
+    this.setTooltip('Waar als de vogel een pijp raakt. Gebruik dit in een "als"-blok om spel voorbij te activeren of een leven te verliezen.');
   },
 };
 javascriptGenerator.forBlock['bird_is_colliding'] = () => [`window.__bird.isColliding()`, Order.FUNCTION_CALL];
@@ -47,10 +47,10 @@ javascriptGenerator.forBlock['bird_is_colliding'] = () => [`window.__bird.isColl
 // ── Boolean: bird off screen ──────────────────────────────────────────────────
 Blockly.Blocks['bird_is_out_of_bounds'] = {
   init() {
-    this.appendDummyInput().appendField('🐦 bird off screen');
+    this.appendDummyInput().appendField('🐦 vogel buiten beeld');
     this.setOutput(true, 'Boolean');
     this.setColour('#e6a817');
-    this.setTooltip('True when the bird flies above the top edge or hits the ground.');
+    this.setTooltip('Waar als de vogel boven de bovenrand vliegt of de grond raakt.');
   },
 };
 javascriptGenerator.forBlock['bird_is_out_of_bounds'] = () => [`window.__bird.isOutOfBounds()`, Order.FUNCTION_CALL];
@@ -58,10 +58,10 @@ javascriptGenerator.forBlock['bird_is_out_of_bounds'] = () => [`window.__bird.is
 // ── Value: bird Y position ────────────────────────────────────────────────────
 Blockly.Blocks['bird_get_y'] = {
   init() {
-    this.appendDummyInput().appendField('🐦 bird Y position');
+    this.appendDummyInput().appendField('🐦 vogel Y-positie');
     this.setOutput(true, 'Number');
     this.setColour('#e6a817');
-    this.setTooltip('Current vertical position of the bird in pixels (0 = top, 420 = bottom).');
+    this.setTooltip('Huidige verticale positie van de vogel in pixels (0 = boven, 420 = onder).');
   },
 };
 javascriptGenerator.forBlock['bird_get_y'] = () => [`window.__bird.getY()`, Order.FUNCTION_CALL];
@@ -69,10 +69,10 @@ javascriptGenerator.forBlock['bird_get_y'] = () => [`window.__bird.getY()`, Orde
 // ── Value: bird vertical velocity ────────────────────────────────────────────
 Blockly.Blocks['bird_get_velocity'] = {
   init() {
-    this.appendDummyInput().appendField('🐦 bird vertical speed');
+    this.appendDummyInput().appendField('🐦 verticale vogelsnelheid');
     this.setOutput(true, 'Number');
     this.setColour('#e6a817');
-    this.setTooltip('Current vertical speed: negative = moving up, positive = moving down.');
+    this.setTooltip('Huidige verticale snelheid: negatief = omhoog, positief = omlaag.');
   },
 };
 javascriptGenerator.forBlock['bird_get_velocity'] = () => [`window.__bird.getVelocity()`, Order.FUNCTION_CALL];
