@@ -26,4 +26,11 @@ export const games = [
     icon: '🔢',
     color: '#7b5ea7',
   },
+  {
+    id: 'mar-io',
+    title: 'marIO',
+    description: 'Bouw je eigen Mario-level met vijanden, obstakels en power-ups via Blockly.',
+    icon: '🍄',
+    color: '#e60000',
+  },
 ];
