@@ -20,24 +20,24 @@ export const games = [
     color: '#e63946',
   },
   {
-    id: 'guess-the-number',
-    title: 'Raad het Getal',
-    description: 'Stel het bereik, hints en regels van een raadspel met getallen in.',
-    icon: '🔢',
-    color: '#7b5ea7',
-  },
-  {
     id: 'mar-io',
     title: 'marIO',
     description: 'Bouw je eigen Mario-level met vijanden, obstakels en power-ups via Blockly.',
     icon: '🍄',
-    color: '#e60000',
+    color: '#7c9eb2',
   },
   {
     id: 'mar-io-advanced',
     title: 'marIO++',
     description: 'Schrijf de echte game loop — zwaartekracht, vijanden en botsingen — volledig in Blockly.',
     icon: '🍄+',
-    color: '#e63946',
+    color: '#217954',
+  },
+  {
+    id: 'guess-the-number',
+    title: 'Raad het Getal',
+    description: 'Stel het bereik, hints en regels van een raadspel met getallen in.',
+    icon: '🔢',
+    color: '#7b5ea7',
   },
 ];
