@@ -56,16 +56,6 @@ export function initPlatform(gamePlugin) {
     document.getElementById('hintText').textContent = '▶ PRESS RUN GAME TO START';
   }
 
-  function handleCanvasInteraction() {
-    if (gamePlugin.canRestart()) {
-      gamePlugin.initGame();
-      gamePlugin.gameLoop();
-      document.getElementById('runBtn').textContent = '⏹ STOP';
-      document.getElementById('runBtn').classList.add('running');
-      document.getElementById('hintText').textContent = gamePlugin.runningHint || 'GAME IS RUNNING';
-    }
-  }
-
   window.addEventListener('load', () => {
     initBlockly(gamePlugin.toolboxConfig, gamePlugin.defaultWorkspaceXML);
     gamePlugin.drawIdleScreen();
@@ -81,7 +71,7 @@ export function initPlatform(gamePlugin) {
       if (gamePlugin.isRunning()) {
         gamePlugin.handleInput(e);
       } else {
-        handleCanvasInteraction();
+        document.getElementById('runBtn').click();
       }
     });
 
@@ -95,7 +85,7 @@ export function initPlatform(gamePlugin) {
         if (gamePlugin.isRunning()) {
           gamePlugin.handleInput(null);
         } else {
-          handleCanvasInteraction();
+          document.getElementById('runBtn').click();
         }
       }
     });
