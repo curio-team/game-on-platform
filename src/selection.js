@@ -5,7 +5,7 @@ const container = document.getElementById('gameCards');
 
 for (const g of games) {
   const card = document.createElement('a');
-  card.href = `/games/${g.id}/`;
+  card.href = `./games/${g.id}/`;
   card.className = 'game-card';
   card.style.setProperty('--card-color', g.color);
   card.innerHTML = `
