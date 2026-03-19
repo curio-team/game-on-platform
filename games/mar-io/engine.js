@@ -576,7 +576,7 @@ function updateMario() {
   } else {
     // Rising — hit blocks from below
     for (const b of game.world.blocks) {
-      if (aabb(m, b)) {
+      if (aabb(m, b) && m.y - m.vy >= b.y + b.h - 2) {
         m.y = b.y + b.h;
         m.vy = 1;
         if (b.type === 'question' && !b.hit) {
@@ -589,7 +589,7 @@ function updateMario() {
       }
     }
     for (const p of game.world.pipes) {
-      if (aabb(m, p)) { m.y = p.y + p.h; m.vy = 1; }
+      if (aabb(m, p) && m.y - m.vy >= p.y + p.h - 2) { m.y = p.y + p.h; m.vy = 1; }
     }
   }
 
