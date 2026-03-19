@@ -1,6 +1,16 @@
 import * as Blockly from 'blockly/core';
 import { javascriptGenerator, Order } from 'blockly/javascript';
-
+// ── Statement: update all pipes ─────────────────────────────────────────────────────
+Blockly.Blocks['pipe_update'] = {
+  init() {
+    this.appendDummyInput().appendField('🏗️ verplaats alle pijpen');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour('#4a90d9');
+    this.setTooltip('Verplaatst alle pijpen naar links met de ingestelde snelheid. Verwijdert pijpen die van het scherm zijn. Activeert "Wanneer een pijp is gepasseerd" als de vogel er voorbij komt.');
+  },
+};
+javascriptGenerator.forBlock['pipe_update'] = () => `window.__pipes.update();\n`;
 // ── Statement: spawn a pipe ───────────────────────────────────────────────────
 Blockly.Blocks['pipe_spawn_now'] = {
   init() {

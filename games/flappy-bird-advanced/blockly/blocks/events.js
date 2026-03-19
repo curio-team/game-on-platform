@@ -64,3 +64,35 @@ javascriptGenerator.forBlock['event_on_score'] = (block, generator) => {
   const body = generator.statementToCode(block, 'DO');
   return `window.__gameHooks.onScore.push(function() {\n${body}});\n`;
 };
+
+// ── Hat block: When bird collides with a pipe ───────────────────────────────────────
+Blockly.Blocks['event_on_collision'] = {
+  init() {
+    this.appendDummyInput().appendField('💥 Wanneer vogel een pijp raakt:');
+    this.appendStatementInput('DO').setCheck(null);
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setColour('#e63946');
+    this.setTooltip('Draait automatisch wanneer de vogel een pijp raakt. Verlies hier een leven of activeer spel voorbij.');
+  },
+};
+javascriptGenerator.forBlock['event_on_collision'] = (block, generator) => {
+  const body = generator.statementToCode(block, 'DO');
+  return `window.__gameHooks.onCollision.push(function() {\n${body}});\n`;
+};
+
+// ── Hat block: When bird goes out of bounds ──────────────────────────────────────
+Blockly.Blocks['event_on_out_of_bounds'] = {
+  init() {
+    this.appendDummyInput().appendField('🚧 Wanneer vogel buiten beeld:');
+    this.appendStatementInput('DO').setCheck(null);
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setColour('#e63946');
+    this.setTooltip('Draait automatisch wanneer de vogel de grond raakt of boven het scherm vliegt.');
+  },
+};
+javascriptGenerator.forBlock['event_on_out_of_bounds'] = (block, generator) => {
+  const body = generator.statementToCode(block, 'DO');
+  return `window.__gameHooks.onOutOfBounds.push(function() {\n${body}});\n`;
+};

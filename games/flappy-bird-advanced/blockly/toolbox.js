@@ -3,10 +3,12 @@ export const toolboxConfig = {
   contents: [
     {
       kind: 'category', name: '🎮 Gebeurtenissen', colour: '#e63946', contents: [
+        { kind: 'block', type: 'event_game_start' },
         { kind: 'block', type: 'event_every_frame' },
         { kind: 'block', type: 'event_on_flap' },
-        { kind: 'block', type: 'event_game_start' },
         { kind: 'block', type: 'event_on_score' },
+        { kind: 'block', type: 'event_on_collision' },
+        { kind: 'block', type: 'event_on_out_of_bounds' },
       ],
     },
     {
@@ -27,6 +29,7 @@ export const toolboxConfig = {
     },
     {
       kind: 'category', name: '🏗️ Pipes', colour: '#4a90d9', contents: [
+        { kind: 'block', type: 'pipe_update' },
         { kind: 'block', type: 'pipe_spawn_now' },
         {
           kind: 'block', type: 'pipe_set_speed',
@@ -99,41 +102,55 @@ export const toolboxConfig = {
 };
 
 /**
- * Default workspace — a complete working Flappy Bird game loop.
+ * Default workspace — a complete working Flappy Bird game, fully Blockly-driven.
  *
- * 🎮 Every frame: apply gravity → every 90 frames spawn a pipe → if hit or OOB → game over
+ * 🚀 Game start: set lives, pipe speed, pipe gap
+ * 🎮 Every frame: apply gravity → update pipes → every 90 frames spawn a pipe
  * 👆 On flap: bird flap with force 12
+ * 🏆 On score: add 1 to score + spark effect
+ * 💥 On collision: lose a life
+ * 🚧 On out of bounds: game over
  */
 export const DEFAULT_WORKSPACE_XML = `<xml>
-  <block type="event_every_frame" x="20" y="20">
+  <block type="event_game_start" x="20" y="20">
+    <statement name="DO">
+      <block type="game_set_lives">
+        <value name="VALUE">
+          <block type="math_number"><field name="NUM">3</field></block>
+        </value>
+        <next>
+          <block type="pipe_set_speed">
+            <value name="VALUE">
+              <block type="math_number"><field name="NUM">3</field></block>
+            </value>
+            <next>
+              <block type="pipe_set_gap">
+                <value name="VALUE">
+                  <block type="math_number"><field name="NUM">130</field></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="event_every_frame" x="20" y="260">
     <statement name="DO">
       <block type="bird_apply_gravity">
         <value name="AMOUNT">
           <block type="math_number"><field name="NUM">1.2</field></block>
         </value>
         <next>
-          <block type="game_every_n_frames">
-            <value name="FRAMES">
-              <block type="math_number"><field name="NUM">90</field></block>
-            </value>
-            <statement name="DO">
-              <block type="pipe_spawn_now"></block>
-            </statement>
+          <block type="pipe_update">
             <next>
-              <block type="controls_if">
-                <value name="IF0">
-                  <block type="logic_operation">
-                    <field name="OP">OR</field>
-                    <value name="A">
-                      <block type="bird_is_colliding"></block>
-                    </value>
-                    <value name="B">
-                      <block type="bird_is_out_of_bounds"></block>
-                    </value>
-                  </block>
+              <block type="game_every_n_frames">
+                <value name="FRAMES">
+                  <block type="math_number"><field name="NUM">90</field></block>
                 </value>
-                <statement name="DO0">
-                  <block type="game_game_over"></block>
+                <statement name="DO">
+                  <block type="pipe_spawn_now"></block>
                 </statement>
               </block>
             </next>
@@ -150,6 +167,31 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
           <block type="math_number"><field name="NUM">12</field></block>
         </value>
       </block>
+    </statement>
+  </block>
+
+  <block type="event_on_score" x="560" y="160">
+    <statement name="DO">
+      <block type="game_add_score">
+        <value name="AMOUNT">
+          <block type="math_number"><field name="NUM">1</field></block>
+        </value>
+        <next>
+          <block type="game_spark_effect"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="event_on_collision" x="560" y="340">
+    <statement name="DO">
+      <block type="game_lose_life"></block>
+    </statement>
+  </block>
+
+  <block type="event_on_out_of_bounds" x="560" y="460">
+    <statement name="DO">
+      <block type="game_game_over"></block>
     </statement>
   </block>
 </xml>`;

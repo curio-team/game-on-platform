@@ -10,7 +10,7 @@ export const DEFAULT_CONFIG = {
 export function resetConfig() {
   window.GAME_CONFIG = { ...DEFAULT_CONFIG };
   // Reset all Blockly game hooks
-  window.__gameHooks = { onStart: [], onFrame: [], onFlap: [], onScore: [] };
+  window.__gameHooks = { onStart: [], onFrame: [], onFlap: [], onScore: [], onCollision: [], onOutOfBounds: [] };
 }
 
 resetConfig();

@@ -178,6 +178,19 @@ function setupAPI() {
       for (const p of game.pipes) if (p.x + p.w >= bx) return p.gapBottom;
       return canvas.height;
     },
+    update() {
+      const speed = window.GAME_CONFIG.pipeSpeed || 3;
+      const hooks = window.__gameHooks;
+      for (let i = game.pipes.length - 1; i >= 0; i--) {
+        const pipe = game.pipes[i];
+        pipe.x -= speed;
+        if (!pipe.scored && game.bird && pipe.x + pipe.w < game.bird.x) {
+          pipe.scored = true;
+          if (hooks) for (const fn of hooks.onScore) try { fn(); } catch (e) { console.warn('onScore error:', e); }
+        }
+        if (pipe.x + pipe.w < 0) game.pipes.splice(i, 1);
+      }
+    },
   };
 
   window.__game = {
@@ -218,6 +231,7 @@ export function initGame() {
   game.score = 0; game.frame = 0;
   game.lives = 3;
   game.pipes = []; game.particles = [];
+  game._lastColliding = false; game._lastOOB = false;
   game.bird = createBird();
   game.state = 'playing'; game.running = true;
   updateUI();
@@ -241,35 +255,49 @@ export function gameLoop() {
   game.frame++;
   if (game.bird && game.bird.invincible > 0) game.bird.invincible--;
 
-  // Call user's frame hooks — they apply gravity, spawn pipes, check collisions, etc.
+  // Call user's frame hooks — they apply gravity, update pipes, spawn pipes, etc.
   const hooks = window.__gameHooks;
   if (hooks) {
     for (const fn of hooks.onFrame) {
       try { fn(); } catch (e) { console.warn('Frame hook error:', e); }
-      if (!game.running) return; // hook triggered game over
+      if (!game.running) return;
     }
   }
 
   if (!game.running) return;
 
-  // Engine auto-moves pipes and fires onScore when the bird passes one
-  const speed = window.GAME_CONFIG.pipeSpeed || 3;
-  for (let i = game.pipes.length - 1; i >= 0; i--) {
-    const pipe = game.pipes[i];
-    pipe.x -= speed;
-    drawPipe(pipe);
-    if (!pipe.scored && game.bird && pipe.x + pipe.w < game.bird.x) {
-      pipe.scored = true;
-      game.score++;
-      if (game.score > game.best) game.best = game.score;
-      spawnParticles(game.bird.x, game.bird.y, '#ffdd00', 5);
-      updateUI();
-      if (hooks) for (const fn of hooks.onScore) try { fn(); } catch { }
+  // Auto-detect collision → fire onCollision event (edge-triggered)
+  if (game.bird && hooks) {
+    const colliding = window.__bird.isColliding();
+    if (colliding && !game._lastColliding) {
+      game._lastColliding = true;
+      for (const fn of hooks.onCollision) {
+        try { fn(); } catch (e) { console.warn('onCollision error:', e); }
+        if (!game.running) return;
+      }
+    } else if (!colliding) {
+      game._lastColliding = false;
     }
-    if (pipe.x + pipe.w < 0) game.pipes.splice(i, 1);
+
+    if (!game.running) return;
+
+    const oob = window.__bird.isOutOfBounds();
+    if (oob && !game._lastOOB) {
+      game._lastOOB = true;
+      for (const fn of hooks.onOutOfBounds) {
+        try { fn(); } catch (e) { console.warn('onOutOfBounds error:', e); }
+        if (!game.running) return;
+      }
+    } else if (!oob) {
+      game._lastOOB = false;
+    }
   }
 
-  // Particles
+  if (!game.running) return;
+
+  // Draw
+  for (const pipe of game.pipes) drawPipe(pipe);
+
   for (let i = game.particles.length - 1; i >= 0; i--) {
     const p = game.particles[i];
     p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.life -= 0.05;
