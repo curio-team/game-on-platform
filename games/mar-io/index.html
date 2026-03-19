@@ -13,10 +13,11 @@
         crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap"
         rel="stylesheet">
-  <script type="module" crossorigin src="/game-on-platform/assets/marIo-0Rr1eCNq.js"></script>
-  <link rel="modulepreload" crossorigin href="/game-on-platform/assets/platform-DLjRvU_7.js">
-  <link rel="modulepreload" crossorigin href="/game-on-platform/assets/main--NJaABnl.js">
-  <link rel="stylesheet" crossorigin href="/game-on-platform/assets/main-BbU5opf7.css">
+  <script type="module" crossorigin src="/game-on-platform/assets/marIo-Bj3TeYtx.js"></script>
+  <link rel="modulepreload" crossorigin href="/game-on-platform/assets/platform-BPYQ5op4.js">
+  <link rel="modulepreload" crossorigin href="/game-on-platform/assets/main-r7IOKlDE.js">
+  <link rel="modulepreload" crossorigin href="/game-on-platform/assets/levelEditor-ByhA78y8.js">
+  <link rel="stylesheet" crossorigin href="/game-on-platform/assets/main-BAxy-PvM.css">
 </head>
 
 <body>
@@ -71,11 +72,51 @@
                 id="tabBlocks">&#129513; BLOKKEN</button>
         <button class="tab"
                 id="tabCode">{ } GEGENEREERDE CODE</button>
+        <button class="tab"
+                id="tabLevel">&#128507; LEVEL EDITOR</button>
       </div>
       <div id="blocklyDiv"></div>
       <div id="generatedCode"
            class="generated-code-panel">
         <pre id="codeOutput"></pre>
+      </div>
+      <div id="levelEditorPanel"
+           class="level-editor-panel">
+        <div class="editor-toolbar">
+          <div class="editor-tool-group">
+            <button class="tool-btn active"
+                    data-tool="brick">&#129521; BRICK</button>
+            <button class="tool-btn"
+                    data-tool="question">&#10067; ?BLOK</button>
+            <button class="tool-btn"
+                    data-tool="gap">&#11035; GAT</button>
+            <button class="tool-btn"
+                    data-tool="pipe">&#127807; PIJP</button>
+            <button class="tool-btn"
+                    data-tool="coin">&#129689; MUNT</button>
+            <button class="tool-btn"
+                    data-tool="goomba">&#128126; GOOMBA</button>
+            <button class="tool-btn"
+                    data-tool="koopa">&#128034; KOOPA</button>
+            <button class="tool-btn"
+                    data-tool="eraser">&#10005; WIS</button>
+          </div>
+          <div class="editor-options-group">
+            <label class="editor-label">SCHERMEN:
+              <input type="range"
+                     id="levelScreens"
+                     min="2"
+                     max="10"
+                     value="4">
+              <span id="screensVal">4</span>
+            </label>
+            <button class="editor-reset-btn"
+                    id="resetLevel">&#8635; RESET</button>
+          </div>
+        </div>
+        <div class="editor-scroll">
+          <canvas id="levelEditorCanvas"></canvas>
+        </div>
       </div>
     </div>
   </div>

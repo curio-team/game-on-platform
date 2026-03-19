@@ -1,0 +1,6 @@
+import"./main-r7IOKlDE.js";var e=[{id:`flappy-bird`,title:`CodeBird`,description:`Programmeer de fysica, pijpen en visuals van een Flappy Bird-kloon.`,icon:`🐦`,color:`#e6a817`},{id:`flappy-bird-advanced`,title:`CodeBird++`,description:`Schrijf de echte ‘game loop’ - zwaartekracht, pijpen en botsingen - volledig in Blockly.`,icon:`🐦+`,color:`#e63946`},{id:`guess-the-number`,title:`Raad het Getal`,description:`Stel het bereik, hints en regels van een raadspel met getallen in.`,icon:`🔢`,color:`#7b5ea7`},{id:`mar-io`,title:`marIO`,description:`Bouw je eigen Mario-level met vijanden, obstakels en power-ups via Blockly.`,icon:`🍄`,color:`#e60000`},{id:`mar-io-advanced`,title:`marIO++`,description:`Schrijf de echte game loop — zwaartekracht, vijanden en botsingen — volledig in Blockly.`,icon:`🍄+`,color:`#e63946`}],t=document.getElementById(`gameCards`);for(let n of e){let e=document.createElement(`a`);e.href=`./games/${n.id}/`,e.className=`game-card`,e.style.setProperty(`--card-color`,n.color),e.innerHTML=`
+    <div class="game-card-icon">${n.icon}</div>
+    <div class="game-card-title">${n.title}</div>
+    <div class="game-card-desc">${n.description}</div>
+    <div class="game-card-play">▶ SPEEL &amp; CODEER</div>
+  `,t.appendChild(e)}
