@@ -14,6 +14,9 @@ jobs:
           npm ci
           npm run build
 
+      - name: Add .nojekyll 📝
+        run: echo "" > dist/.nojekyll
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
