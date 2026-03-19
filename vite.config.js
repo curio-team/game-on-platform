@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  // For github pages we need to set the base path as it will be https://curio-team.github.io/game-on-platform/:
+  base: '/game-on-platform/',
   build: {
     rollupOptions: {
       input: {
