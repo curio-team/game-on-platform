@@ -5,6 +5,8 @@ import { toolboxConfig, DEFAULT_WORKSPACE_XML } from './blockly/toolbox.js';
 import { resetConfig } from './config.js';
 import { game, initGame, gameLoop, drawIdleScreen, handleJump } from './engine.js';
 import { initPlatform } from '/src/platform.js';
+import { DEFAULT_LEVEL_DATA } from '/src/mario/defaultLevel.js';
+import { initLevelEditor } from '/src/levelEditor.js';
 
 initPlatform({
   toolboxConfig,
@@ -32,3 +34,5 @@ initPlatform({
     }
   },
 });
+
+window.addEventListener('load', () => initLevelEditor(DEFAULT_LEVEL_DATA));

@@ -1,3 +1,5 @@
+import { buildWorldFromJSON as _buildWorldFromJSON } from '/src/mario/levelBuilder.js';
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -62,6 +64,12 @@ function isGroundAt(x) {
   if (!game.world || x < 0 || x > game.world.width) return false;
   for (const g of game.world.groundGaps) { if (x >= g.x1 && x <= g.x2) return false; }
   return true;
+}
+
+// ── Level from JSON ───────────────────────────────────────────────────────────
+
+function buildWorldFromJSON(levelData) {
+  return _buildWorldFromJSON(levelData, TILE, GROUND_Y, canvas.width);
 }
 
 // ── Level generation ──────────────────────────────────────────────────────────
@@ -697,7 +705,7 @@ export function initGame() {
   game.particles = [];
   game.camera = { x: 0 };
   game.keys = {};
-  game.world = generateLevel();
+  game.world = window.LEVEL_DATA ? buildWorldFromJSON(window.LEVEL_DATA) : generateLevel();
 
   const sz = cfg.marioSize;
   game.mario = {

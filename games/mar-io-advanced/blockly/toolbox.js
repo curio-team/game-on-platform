@@ -47,34 +47,6 @@ export const toolboxConfig = {
       kind: 'category', name: '\ud83c\udf0d Wereld', colour: '#4a90d9', contents: [
         { kind: 'block', type: 'world_generate' },
         {
-          kind: 'block', type: 'world_set_length',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 4 } } } },
-        },
-        {
-          kind: 'block', type: 'world_set_gaps',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 2 } } } },
-        },
-        {
-          kind: 'block', type: 'world_set_pipes',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 3 } } } },
-        },
-        {
-          kind: 'block', type: 'world_set_platforms',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 4 } } } },
-        },
-        {
-          kind: 'block', type: 'world_set_coins',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 15 } } } },
-        },
-        {
-          kind: 'block', type: 'world_set_goombas',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 5 } } } },
-        },
-        {
-          kind: 'block', type: 'world_set_koopas',
-          inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 2 } } } },
-        },
-        {
           kind: 'block', type: 'world_set_enemy_speed',
           inputs: { VALUE: { shadow: { type: 'math_number', fields: { NUM: 1 } } } },
         },
@@ -178,35 +150,7 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
           <block type="math_number"><field name="NUM">3</field></block>
         </value>
         <next>
-          <block type="world_set_length">
-            <value name="VALUE">
-              <block type="math_number"><field name="NUM">4</field></block>
-            </value>
-            <next>
-              <block type="world_set_goombas">
-                <value name="VALUE">
-                  <block type="math_number"><field name="NUM">5</field></block>
-                </value>
-                <next>
-                  <block type="world_set_koopas">
-                    <value name="VALUE">
-                      <block type="math_number"><field name="NUM">2</field></block>
-                    </value>
-                    <next>
-                      <block type="world_set_coins">
-                        <value name="VALUE">
-                          <block type="math_number"><field name="NUM">15</field></block>
-                        </value>
-                        <next>
-                          <block type="world_generate"></block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
+          <block type="world_generate"></block>
         </next>
       </block>
     </statement>

@@ -62,6 +62,9 @@ export function initPlatform(gamePlugin) {
 
     document.getElementById('tabBlocks').addEventListener('click', () => showTab('blocks'));
     document.getElementById('tabCode').addEventListener('click', () => showTab('code'));
+    if (document.getElementById('tabLevel')) {
+      document.getElementById('tabLevel').addEventListener('click', () => showTab('level'));
+    }
 
     document.getElementById('runBtn').addEventListener('click', () => {
       if (gamePlugin.isRunning()) stopGame(); else applyAndRun();
