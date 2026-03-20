@@ -3,7 +3,7 @@ import './blockly/blocks/index.js';
 
 import { toolboxConfig, DEFAULT_WORKSPACE_XML } from './blockly/toolbox.js';
 import { resetConfig } from './config.js';
-import { game, initGame, gameLoop, drawIdleScreen, handleJump } from './engine.js';
+import { game, gpKeys, initGame, gameLoop, drawIdleScreen, handleJump } from './engine.js';
 import { initPlatform } from '/src/platform.js';
 import { DEFAULT_LEVEL_DATA } from '/src/mario/defaultLevel.js';
 import { initLevelEditor } from '/src/levelEditor.js';
@@ -39,6 +39,7 @@ initPlatform({
   handleInput: () => handleJump(),
   isRunning: () => game.running,
   canRestart: () => game.state === 'gameover' || game.state === 'win' || game.state === 'idle',
+  getGpKeys: () => gpKeys,
 
   runningHint: '← → LOPEN | SPATIE SPRINGEN | SPRING OP VIJANDEN',
 

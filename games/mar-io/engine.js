@@ -19,6 +19,10 @@ document.addEventListener('keydown', (e) => { game.keys[e.code] = true; });
 document.addEventListener('keyup', (e) => { game.keys[e.code] = false; });
 window.addEventListener('blur', () => { game.keys = {}; });
 
+// Gamepad key state — written each frame by platform.js via getGpKeys().
+// Kept separate so keyboard and gamepad can be held simultaneously.
+export const gpKeys = {};
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function seededRng(seed) {
@@ -527,15 +531,16 @@ function updateMario() {
   const m = game.mario;
 
   // ─ Jump ──────────────────────────────────────────────────────────────────
-  if ((game.keys['Space'] || game.keys['ArrowUp'] || game.keys['KeyW']) && m.grounded) {
+  const key = (c) => game.keys[c] || gpKeys[c];
+  if ((key('Space') || key('ArrowUp') || key('KeyW')) && m.grounded) {
     m.vy = -cfg.jumpForce;
     m.grounded = false;
   }
 
   // ─ Horizontal movement ──────────────────────────────────────────────────
   let dx = 0;
-  if (game.keys['ArrowRight'] || game.keys['KeyD']) dx += cfg.runSpeed;
-  if (game.keys['ArrowLeft'] || game.keys['KeyA']) dx -= cfg.runSpeed;
+  if (key('ArrowRight') || key('KeyD')) dx += cfg.runSpeed;
+  if (key('ArrowLeft') || key('KeyA')) dx -= cfg.runSpeed;
   m.x += dx;
   if (dx !== 0) m.frame++;
   m.facing = dx > 0 ? 'right' : dx < 0 ? 'left' : m.facing;

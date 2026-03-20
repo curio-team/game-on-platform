@@ -19,7 +19,9 @@ export const game = {
 document.addEventListener('keydown', (e) => { game.keys[e.code] = true; });
 document.addEventListener('keyup', (e) => { game.keys[e.code] = false; });
 window.addEventListener('blur', () => { game.keys = {}; });
-
+// Gamepad key state — written each frame by platform.js via getGpKeys().
+// Kept separate so keyboard and gamepad can be held simultaneously.
+export const gpKeys = {};
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function seededRng(seed) {
@@ -499,8 +501,8 @@ function setupAPI() {
     move(speed) {
       const m = game.mario; if (!m) return;
       let dx = 0;
-      if (game.keys['ArrowRight'] || game.keys['KeyD']) dx += (+speed || 3);
-      if (game.keys['ArrowLeft'] || game.keys['KeyA']) dx -= (+speed || 3);
+      if (game.keys['ArrowRight'] || gpKeys['ArrowRight'] || game.keys['KeyD'] || gpKeys['KeyD']) dx += (+speed || 3);
+      if (game.keys['ArrowLeft'] || gpKeys['ArrowLeft'] || game.keys['KeyA'] || gpKeys['KeyA']) dx -= (+speed || 3);
       m.x += dx;
       if (dx !== 0) m.frame++;
       m.facing = dx > 0 ? 'right' : dx < 0 ? 'left' : m.facing;
@@ -525,9 +527,9 @@ function setupAPI() {
     isGrounded() { return game.mario ? game.mario.grounded : false; },
     isFalling() { return game.mario ? game.mario.vy > 0 && !game.mario.grounded : false; },
     /** For Blockly: returns true if pressing right */
-    isPressingRight() { return !!(game.keys['ArrowRight'] || game.keys['KeyD']); },
-    isPressingLeft() { return !!(game.keys['ArrowLeft'] || game.keys['KeyA']); },
-    isPressingJump() { return !!(game.keys['Space'] || game.keys['ArrowUp'] || game.keys['KeyW']); },
+    isPressingRight() { return !!(game.keys['ArrowRight'] || gpKeys['ArrowRight'] || game.keys['KeyD'] || gpKeys['KeyD']); },
+    isPressingLeft() { return !!(game.keys['ArrowLeft'] || gpKeys['ArrowLeft'] || game.keys['KeyA'] || gpKeys['KeyA']); },
+    isPressingJump() { return !!(game.keys['Space'] || gpKeys['Space'] || game.keys['ArrowUp'] || gpKeys['ArrowUp'] || game.keys['KeyW'] || gpKeys['KeyW']); },
     setInvincible(frames) {
       const m = game.mario; if (!m) return;
       m.invincible = Math.max(0, Math.min(300, +frames || 60));
