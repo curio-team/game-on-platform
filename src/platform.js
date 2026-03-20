@@ -29,36 +29,277 @@ import { showTab } from './tabs.js';
 import { formatCode } from './ui.js';
 
 export function initPlatform(gamePlugin) {
+  const origin = window.location.origin;
+  const isPopout = new URLSearchParams(window.location.search).get('popout') === '1';
 
-  function applyAndRun() {
+  const MSG = {
+    READY: 'POP_OUT_READY',
+    RUN_CODE: 'POP_OUT_RUN_CODE',
+    REQUEST_CODE: 'POP_OUT_REQUEST_CODE',
+    PROVIDE_CODE: 'POP_OUT_PROVIDE_CODE',
+    STOP: 'POP_OUT_STOP',
+    STATE: 'POP_OUT_STATE',
+    INPUT_PRIMARY: 'POP_OUT_INPUT_PRIMARY',
+    INPUT_CANVAS_CLICK: 'POP_OUT_INPUT_CANVAS_CLICK',
+  };
+
+  let initialRunText = '';
+  let initialHintText = '';
+
+  // Main window (not popout): keeps the popup reference + state.
+  let popoutWindow = null;
+  let popoutReady = false;
+  let popoutRunning = false;
+  let pendingRunCode = null;
+
+  // Popout window: remembers the last generated code so its Run button works.
+  let lastReceivedCode = null;
+  let pendingRunAfterCode = false;
+
+  function setRunningUI() {
+    const runBtn = document.getElementById('runBtn');
+    const hintText = document.getElementById('hintText');
+    if (!runBtn || !hintText) return;
+    runBtn.textContent = '⏹ STOP';
+    runBtn.classList.add('running');
+    hintText.textContent = gamePlugin.runningHint || 'SPEL IS BEZIG';
+  }
+
+  function setIdleUI() {
+    const runBtn = document.getElementById('runBtn');
+    const hintText = document.getElementById('hintText');
+    if (!runBtn || !hintText) return;
+    runBtn.textContent = initialRunText || '▶ START SPEL';
+    runBtn.classList.remove('running');
+    hintText.textContent = initialHintText || '▶ DRUK OP START SPEL OM TE BEGINNEN';
+  }
+
+  function notifyOpenerState(running) {
+    if (!isPopout) return;
+    try {
+      if (window.opener && !window.opener.closed) {
+        window.opener.postMessage({ type: MSG.STATE, running }, origin);
+      }
+    } catch {
+      // ignore (opener might be gone / blocked)
+    }
+  }
+
+  function applyCodeAndRun(code) {
     gamePlugin.resetConfig();
     try {
-      const code = javascriptGenerator.workspaceToCode(getWorkspace());
-      // eval executes Blockly-generated `window.GAME_CONFIG.x = value` assignments
       // eslint-disable-next-line no-eval
       eval(code);
-      document.getElementById('codeOutput').innerHTML = formatCode(code);
-    } catch (e) { console.warn('Block code error:', e); }
+      const codeOutput = document.getElementById('codeOutput');
+      if (codeOutput) codeOutput.innerHTML = formatCode(code);
+    } catch (e) {
+      console.warn('Block code error:', e);
+    }
 
     gamePlugin.clampConfig();
     gamePlugin.initGame();
     gamePlugin.gameLoop();
-
-    document.getElementById('runBtn').textContent = '⏹ STOP';
-    document.getElementById('runBtn').classList.add('running');
-    document.getElementById('hintText').textContent = gamePlugin.runningHint || 'SPEL IS BEZIG';
+    setRunningUI();
+    notifyOpenerState(true);
   }
 
-  function stopGame() {
+  function applyAndRunFromWorkspace() {
+    const code = javascriptGenerator.workspaceToCode(getWorkspace());
+    applyCodeAndRun(code);
+  }
+
+  function stopLocalGame() {
     gamePlugin.stopGame();
-    document.getElementById('runBtn').textContent = '▶ START SPEL';
-    document.getElementById('runBtn').classList.remove('running');
-    document.getElementById('hintText').textContent = '▶ DRUK OP START SPEL OM TE BEGINNEN';
+    setIdleUI();
+    notifyOpenerState(false);
+  }
+
+  function popoutActive() {
+    return !isPopout && popoutWindow && !popoutWindow.closed;
+  }
+
+  function sendToPopout(msg) {
+    if (!popoutActive()) return false;
+    try {
+      popoutWindow.postMessage(msg, origin);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  function sendToOpener(msg) {
+    if (isPopout) {
+      try {
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage(msg, origin);
+          return true;
+        }
+      } catch {
+        // ignore
+      }
+    }
+    return false;
+  }
+
+  function requestCodeFromOpener() {
+    pendingRunAfterCode = true;
+    const hintText = document.getElementById('hintText');
+    if (hintText) hintText.textContent = 'WACHT OP CODE...';
+    sendToOpener({ type: MSG.REQUEST_CODE });
+  }
+
+  function getScaledOffsets(canvasEl, mouseEvent) {
+    const rect = canvasEl.getBoundingClientRect();
+    const scaleX = rect.width ? canvasEl.width / rect.width : 1;
+    const scaleY = rect.height ? canvasEl.height / rect.height : 1;
+    const clientX = mouseEvent?.clientX ?? rect.left;
+    const clientY = mouseEvent?.clientY ?? rect.top;
+    return {
+      offsetX: Math.max(0, Math.min(canvasEl.width, (clientX - rect.left) * scaleX)),
+      offsetY: Math.max(0, Math.min(canvasEl.height, (clientY - rect.top) * scaleY)),
+    };
+  }
+
+  function fitCanvasToViewport() {
+    if (!isPopout) return;
+    const canvasEl = document.getElementById('gameCanvas');
+    if (!canvasEl) return;
+    const panel = document.querySelector('.game-panel');
+    if (!panel) return;
+
+    const panelStyle = window.getComputedStyle(panel);
+    const paddingLeft = parseFloat(panelStyle.paddingLeft || '0') || 0;
+    const paddingRight = parseFloat(panelStyle.paddingRight || '0') || 0;
+    const paddingTop = parseFloat(panelStyle.paddingTop || '0') || 0;
+    const paddingBottom = parseFloat(panelStyle.paddingBottom || '0') || 0;
+    const gap = parseFloat(panelStyle.gap || '0') || 0;
+
+    const panelW = panel.clientWidth - paddingLeft - paddingRight;
+    const panelH = panel.clientHeight - paddingTop - paddingBottom;
+    if (!(panelW > 0 && panelH > 0)) return;
+
+    const panelLabel = panel.querySelector('.panel-label');
+    const gameInfo = panel.querySelector('.game-info');
+    const hintEl = panel.querySelector('#hintText')?.closest('.hint') || panel.querySelector('.hint');
+
+    const labelH = panelLabel ? panelLabel.getBoundingClientRect().height : 0;
+    const infoH = gameInfo ? gameInfo.getBoundingClientRect().height : 0;
+    const hintH = hintEl ? hintEl.getBoundingClientRect().height : 0;
+
+    const otherCount =
+      (panelLabel ? 1 : 0) +
+      (gameInfo ? 1 : 0) +
+      (hintEl ? 1 : 0);
+    const totalChildCount = 1 /* canvas */ + otherCount;
+    const gapsH = Math.max(0, totalChildCount - 1) * gap;
+
+    const availableHForCanvas = panelH - labelH - infoH - hintH - gapsH;
+    if (!(availableHForCanvas > 0)) return;
+
+    const scale = Math.max(
+      0.01,
+      Math.min(panelW / canvasEl.width, availableHForCanvas / canvasEl.height)
+    );
+
+    canvasEl.style.width = `${canvasEl.width * scale}px`;
+    canvasEl.style.height = `${canvasEl.height * scale}px`;
   }
 
   window.addEventListener('load', () => {
     initBlockly(gamePlugin.toolboxConfig, gamePlugin.defaultWorkspaceXML);
     gamePlugin.drawIdleScreen();
+
+    const runBtnEl = document.getElementById('runBtn');
+    const hintTextEl = document.getElementById('hintText');
+    initialRunText = runBtnEl?.textContent ?? '';
+    initialHintText = hintTextEl?.textContent ?? '';
+
+    if (isPopout) {
+      document.body.classList.add('popout-mode');
+      // Blockly stays in the DOM but we don't want it visible in the popout.
+      const codePanel = document.querySelector('.code-panel');
+      if (codePanel) codePanel.style.display = 'none';
+
+      // First layout pass: fit the canvas without distorting aspect ratio.
+      requestAnimationFrame(() => {
+        fitCanvasToViewport();
+      });
+    } else {
+      // Inject a Pop-out button next to the existing Run button.
+      let popoutBtn = document.getElementById('popoutBtn');
+      if (!popoutBtn) {
+        popoutBtn = document.createElement('button');
+        popoutBtn.id = 'popoutBtn';
+        popoutBtn.className = 'popout-btn';
+        popoutBtn.type = 'button';
+        popoutBtn.textContent = '↗ POP-UIT';
+        runBtnEl?.insertAdjacentElement('afterend', popoutBtn);
+      }
+
+      const openPopout = () => {
+        if (popoutWindow && !popoutWindow.closed) {
+          popoutWindow.focus();
+          return;
+        }
+
+        // Stop any local loop to avoid double-running.
+        if (gamePlugin.isRunning()) stopLocalGame();
+
+        popoutReady = false;
+        popoutRunning = false;
+        pendingRunCode = null;
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('popout', '1');
+
+        // Note: no noopener here; we need window.opener messaging.
+        popoutWindow = window.open(
+          url.toString(),
+          'game-on-platform-popout',
+          'width=980,height=760'
+        );
+
+        if (!popoutWindow) return; // popup blocked
+        popoutWindow.focus();
+        setIdleUI();
+      };
+
+      popoutBtn?.addEventListener('click', openPopout);
+
+      // Receive popout status and "ready" signals.
+      window.addEventListener('message', (event) => {
+        if (event.origin !== origin) return;
+        if (!popoutWindow || event.source !== popoutWindow) return;
+        const msg = event.data;
+        if (!msg || typeof msg !== 'object') return;
+
+        if (msg.type === MSG.READY) {
+          popoutReady = true;
+          if (pendingRunCode) {
+            const code = pendingRunCode;
+            pendingRunCode = null;
+            sendToPopout({ type: MSG.RUN_CODE, code });
+          }
+          return;
+        }
+
+        if (msg.type === MSG.STATE) {
+          popoutRunning = !!msg.running;
+          if (popoutRunning) setRunningUI(); else setIdleUI();
+        }
+
+        // Popout can request latest Blockly code (e.g. when user presses Run only in popout).
+        if (msg.type === MSG.REQUEST_CODE) {
+          try {
+            const code = javascriptGenerator.workspaceToCode(getWorkspace());
+            popoutWindow.postMessage({ type: MSG.PROVIDE_CODE, code }, origin);
+          } catch (e) {
+            console.warn('Code request error:', e);
+          }
+        }
+      });
+    }
 
     document.getElementById('tabBlocks').addEventListener('click', () => showTab('blocks'));
     document.getElementById('tabCode').addEventListener('click', () => showTab('code'));
@@ -66,19 +307,122 @@ export function initPlatform(gamePlugin) {
       document.getElementById('tabLevel').addEventListener('click', () => showTab('level'));
     }
 
+    if (isPopout) {
+      // Popout receives commands from the main window.
+      window.addEventListener('message', (event) => {
+        if (event.origin !== origin) return;
+        const msg = event.data;
+        if (!msg || typeof msg !== 'object') return;
+
+        if (msg.type === MSG.RUN_CODE) {
+          lastReceivedCode = msg.code;
+          pendingRunAfterCode = false;
+          applyCodeAndRun(lastReceivedCode);
+          return;
+        }
+        if (msg.type === MSG.PROVIDE_CODE) {
+          lastReceivedCode = msg.code;
+          if (pendingRunAfterCode && !gamePlugin.isRunning()) {
+            pendingRunAfterCode = false;
+            applyCodeAndRun(lastReceivedCode);
+          }
+          return;
+        }
+        if (msg.type === MSG.STOP) {
+          if (gamePlugin.isRunning()) stopLocalGame();
+          return;
+        }
+        if (msg.type === MSG.INPUT_PRIMARY) {
+          if (gamePlugin.isRunning()) gamePlugin.handleInput(null);
+          return;
+        }
+        if (msg.type === MSG.INPUT_CANVAS_CLICK) {
+          if (gamePlugin.isRunning()) {
+            const e = { offsetX: msg.offsetX, offsetY: msg.offsetY };
+            gamePlugin.handleInput(e);
+          }
+        }
+      });
+
+      // Tell the opener we are ready to accept RUN_CODE messages.
+      try {
+        if (window.opener && !window.opener.closed) {
+          window.opener.postMessage({ type: MSG.READY }, origin);
+        }
+      } catch {
+        // ignore
+      }
+    }
+
     document.getElementById('runBtn').addEventListener('click', () => {
-      if (gamePlugin.isRunning()) stopGame(); else applyAndRun();
+      if (isPopout) {
+        if (gamePlugin.isRunning()) stopLocalGame();
+        else if (lastReceivedCode) applyCodeAndRun(lastReceivedCode);
+        else requestCodeFromOpener();
+        return;
+      }
+
+      if (popoutActive()) {
+        if (popoutRunning) {
+          sendToPopout({ type: MSG.STOP });
+          popoutRunning = false;
+          setIdleUI();
+          return;
+        }
+
+        const code = javascriptGenerator.workspaceToCode(getWorkspace());
+        const codeOutput = document.getElementById('codeOutput');
+        if (codeOutput) codeOutput.innerHTML = formatCode(code);
+
+        // We only send once the popout told us it is ready.
+        if (!popoutReady) pendingRunCode = code;
+        else sendToPopout({ type: MSG.RUN_CODE, code });
+
+        popoutRunning = true;
+        setRunningUI();
+        popoutWindow?.focus?.();
+        return;
+      }
+
+      if (gamePlugin.isRunning()) stopLocalGame(); else applyAndRunFromWorkspace();
     });
 
     document.getElementById('gameCanvas').addEventListener('click', (e) => {
-      if (gamePlugin.isRunning()) {
-        gamePlugin.handleInput(e);
-      } else {
-        document.getElementById('runBtn').click();
+      if (popoutActive()) {
+        if (popoutRunning) {
+          const canvasEl = document.getElementById('gameCanvas');
+          const scaled = getScaledOffsets(canvasEl, e);
+          sendToPopout({
+            type: MSG.INPUT_CANVAS_CLICK,
+            offsetX: scaled.offsetX,
+            offsetY: scaled.offsetY,
+          });
+        } else {
+          document.getElementById('runBtn').click();
+        }
+        return;
       }
+
+      if (gamePlugin.isRunning()) {
+        const canvasEl = document.getElementById('gameCanvas');
+        const scaled = getScaledOffsets(canvasEl, e);
+        gamePlugin.handleInput({ offsetX: scaled.offsetX, offsetY: scaled.offsetY });
+      }
+      else document.getElementById('runBtn').click();
     });
 
     document.addEventListener('keydown', (e) => {
+      if (popoutActive()) {
+        // Only "primary" input (Space) is forwarded in main-window mode.
+        // Arrow keys are handled once focus is in the popout window.
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (popoutRunning) sendToPopout({ type: MSG.INPUT_PRIMARY });
+          else document.getElementById('runBtn').click();
+        }
+        return;
+      }
+
       // Forward all keys to the game first (arrow keys, Enter, etc.)
       if (gamePlugin.handleKeydown) gamePlugin.handleKeydown(e);
 
@@ -97,6 +441,12 @@ export function initPlatform(gamePlugin) {
       const ws = getWorkspace();
       if (ws) Blockly.svgResize(ws);
     });
+
+    if (isPopout) {
+      window.addEventListener('resize', () => fitCanvasToViewport());
+      // In case fonts load and change layout.
+      setTimeout(() => fitCanvasToViewport(), 200);
+    }
 
     startGamepadPolling();
   });
@@ -124,6 +474,12 @@ export function initPlatform(gamePlugin) {
     let prevAxisRight = false;
 
     function poll() {
+      // In main-window mode, we let the popout handle controller input.
+      if (!isPopout && popoutActive()) {
+        requestAnimationFrame(poll);
+        return;
+      }
+
       const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
       const gp = Array.from(gamepads).find(g => g && g.connected);
 

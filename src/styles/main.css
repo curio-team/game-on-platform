@@ -96,6 +96,58 @@ header::after {
   box-shadow: 4px 4px 0 #880011;
 }
 
+.popout-mode .main {
+  flex-direction: column;
+  min-height: 0;
+}
+
+.popout-mode .game-panel {
+  width: 100%;
+  border-right: none;
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 0;
+}
+
+.popout-mode #gameCanvas {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.popout-mode .code-panel {
+  display: none !important;
+}
+
+.popout-btn {
+  background: var(--bg);
+  color: var(--accent);
+  border: 2px solid var(--border);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 4px 4px 0 var(--border);
+  transition: transform 0.05s, box-shadow 0.05s, background 0.1s;
+  margin-left: 10px;
+}
+
+.popout-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 3px 3px 0 var(--border);
+}
+
+.popout-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--border);
+}
+
 /* ── MAIN LAYOUT ── */
 .main {
   display: flex;
