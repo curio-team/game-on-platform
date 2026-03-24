@@ -37,6 +37,7 @@ export function initPlatform(gamePlugin) {
     RUN_CODE: 'POP_OUT_RUN_CODE',
     REQUEST_CODE: 'POP_OUT_REQUEST_CODE',
     PROVIDE_CODE: 'POP_OUT_PROVIDE_CODE',
+    HOT_RELOAD_CODE: 'POP_OUT_HOT_RELOAD_CODE',
     STOP: 'POP_OUT_STOP',
     STATE: 'POP_OUT_STATE',
     INPUT_PRIMARY: 'POP_OUT_INPUT_PRIMARY',
@@ -51,6 +52,9 @@ export function initPlatform(gamePlugin) {
   let popoutReady = false;
   let popoutRunning = false;
   let pendingRunCode = null;
+  let pendingHotReloadCode = null;
+  let hotReloadTimer = null;
+  const HOT_RELOAD_DEBOUNCE_MS = 250;
 
   // Popout window: remembers the last generated code so its Run button works.
   let lastReceivedCode = null;
@@ -101,6 +105,21 @@ export function initPlatform(gamePlugin) {
     gamePlugin.gameLoop();
     setRunningUI();
     notifyOpenerState(true);
+  }
+
+  function applyCodeHotReload(code) {
+    // Hot reload while the game is already running:
+    // - resetConfig() ensures hook arrays don't accumulate duplicates
+    // - eval(code) re-registers window.GAME_CONFIG and __gameHooks
+    // - clampConfig() makes the values safe
+    gamePlugin.resetConfig();
+    try {
+      // eslint-disable-next-line no-eval
+      eval(code);
+    } catch (e) {
+      console.warn('Hot reload code error:', e);
+    }
+    gamePlugin.clampConfig();
   }
 
   function applyAndRunFromWorkspace() {
@@ -210,6 +229,42 @@ export function initPlatform(gamePlugin) {
     initBlockly(gamePlugin.toolboxConfig, gamePlugin.defaultWorkspaceXML);
     gamePlugin.drawIdleScreen();
 
+    // Hot reload: while the game is running, apply new Blockly parameters/hooks
+    // whenever the workspace changes (debounced).
+    if (!isPopout) {
+      const ws = getWorkspace();
+      if (ws?.addChangeListener) {
+        ws.addChangeListener(() => {
+          // Debounce rapid drag/connect actions.
+          if (hotReloadTimer) clearTimeout(hotReloadTimer);
+          hotReloadTimer = setTimeout(() => {
+            hotReloadTimer = null;
+
+            const runningInPopout = popoutActive() && popoutRunning;
+            const runningLocally = gamePlugin.isRunning();
+            if (!runningInPopout && !runningLocally) return;
+
+            let code = null;
+            try {
+              code = javascriptGenerator.workspaceToCode(getWorkspace());
+            } catch (e) {
+              console.warn('Hot reload code generation error:', e);
+              return;
+            }
+
+            if (runningInPopout) {
+              if (popoutReady) sendToPopout({ type: MSG.HOT_RELOAD_CODE, code });
+              else pendingHotReloadCode = code;
+            } else if (runningLocally) {
+              applyCodeHotReload(code);
+              const codeOutput = document.getElementById('codeOutput');
+              if (codeOutput) codeOutput.innerHTML = formatCode(code);
+            }
+          }, HOT_RELOAD_DEBOUNCE_MS);
+        });
+      }
+    }
+
     const runBtnEl = document.getElementById('runBtn');
     const hintTextEl = document.getElementById('hintText');
     initialRunText = runBtnEl?.textContent ?? '';
@@ -249,6 +304,7 @@ export function initPlatform(gamePlugin) {
         popoutReady = false;
         popoutRunning = false;
         pendingRunCode = null;
+        pendingHotReloadCode = null;
 
         const url = new URL(window.location.href);
         url.searchParams.set('popout', '1');
@@ -276,11 +332,11 @@ export function initPlatform(gamePlugin) {
 
         if (msg.type === MSG.READY) {
           popoutReady = true;
-          if (pendingRunCode) {
-            const code = pendingRunCode;
-            pendingRunCode = null;
-            sendToPopout({ type: MSG.RUN_CODE, code });
-          }
+          // If blocks changed during the handshake, prefer the most recent code.
+          const codeToRun = pendingHotReloadCode ?? pendingRunCode;
+          pendingRunCode = null;
+          pendingHotReloadCode = null;
+          if (codeToRun) sendToPopout({ type: MSG.RUN_CODE, code: codeToRun });
           return;
         }
 
@@ -297,6 +353,11 @@ export function initPlatform(gamePlugin) {
           } catch (e) {
             console.warn('Code request error:', e);
           }
+        }
+
+        if (msg.type === MSG.HOT_RELOAD_CODE) {
+          // Main never receives this; popout receives hot reload messages.
+          return;
         }
       });
     }
@@ -318,6 +379,13 @@ export function initPlatform(gamePlugin) {
           lastReceivedCode = msg.code;
           pendingRunAfterCode = false;
           applyCodeAndRun(lastReceivedCode);
+          return;
+        }
+        if (msg.type === MSG.HOT_RELOAD_CODE) {
+          // Apply updated parameters/hooks without resetting world/state.
+          if (gamePlugin.isRunning && gamePlugin.isRunning()) {
+            applyCodeHotReload(msg.code);
+          }
           return;
         }
         if (msg.type === MSG.PROVIDE_CODE) {
@@ -366,10 +434,12 @@ export function initPlatform(gamePlugin) {
         if (popoutRunning) {
           sendToPopout({ type: MSG.STOP });
           popoutRunning = false;
+          pendingHotReloadCode = null;
           setIdleUI();
           return;
         }
 
+        pendingHotReloadCode = null;
         const code = javascriptGenerator.workspaceToCode(getWorkspace());
         const codeOutput = document.getElementById('codeOutput');
         if (codeOutput) codeOutput.innerHTML = formatCode(code);
