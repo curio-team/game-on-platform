@@ -57,7 +57,7 @@ Blockly.Blocks['event_on_score'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Draait automatisch telkens als de vogel succesvol door een pijpopening gaat.');
+    this.setTooltip('Draait automatisch telkens als de vogel succesvol door een buisopening gaat.');
   },
 };
 javascriptGenerator.forBlock['event_on_score'] = (block, generator) => {

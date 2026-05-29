@@ -42,7 +42,7 @@ javascriptGenerator.forBlock['pipe_set_speed'] = (block, generator) => {
 // ── Statement: set pipe gap ───────────────────────────────────────────────────
 Blockly.Blocks['pipe_set_gap'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet pijpopening op');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet buisopening op');
     this.appendDummyInput().appendField('pixels (80=moeilijk, 200=makkelijk)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
