@@ -27,7 +27,7 @@ javascriptGenerator.forBlock['pipe_gap'] = (block, generator) => {
 
 Blockly.Blocks['pipe_interval'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ nieuwe pijp elke');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ nieuwe buis elke');
     this.appendDummyInput().appendField('frames (60=1sec, 30=vaak)');
     this.setColour('#4a90d9');
   },

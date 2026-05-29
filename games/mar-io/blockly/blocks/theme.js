@@ -40,7 +40,7 @@ javascriptGenerator.forBlock['look_blocks'] = (block) =>
 
 Blockly.Blocks['look_pipes'] = {
   init() {
-    this.appendDummyInput().appendField('🎨 pijpkleur').appendField(new FieldColour('#00a800'), 'COLOR');
+    this.appendDummyInput().appendField('🎨 buiskleur').appendField(new FieldColour('#00a800'), 'COLOR');
     this.setColour('#5ea765');
   },
 };

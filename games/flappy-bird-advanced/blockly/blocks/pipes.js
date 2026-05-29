@@ -7,18 +7,18 @@ Blockly.Blocks['pipe_update'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Verplaatst alle buizen naar links met de ingestelde snelheid. Verwijdert buizen die van het scherm zijn. Activeert "Wanneer een pijp is gepasseerd" als de vogel er voorbij komt.');
+    this.setTooltip('Verplaatst alle buizen naar links met de ingestelde snelheid. Verwijdert buizen die van het scherm zijn. Activeert "Wanneer een buis is gepasseerd" als de vogel er voorbij komt.');
   },
 };
 javascriptGenerator.forBlock['pipe_update'] = () => `window.__pipes.update();\n`;
 // ── Statement: spawn a pipe ───────────────────────────────────────────────────
 Blockly.Blocks['pipe_spawn_now'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ maak een nieuwe pijp');
+    this.appendDummyInput().appendField('🏗️ maak een nieuwe buis');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Maakt een nieuw pijppaar aan aan de rechterrand van het scherm. Gebruik in "elke N frames" om de frequentie te regelen.');
+    this.setTooltip('Maakt een nieuw buispaar aan aan de rechterrand van het scherm. Gebruik in "elke N frames" om de frequentie te regelen.');
   },
 };
 javascriptGenerator.forBlock['pipe_spawn_now'] = () => `window.__pipes.spawn();\n`;
@@ -47,7 +47,7 @@ Blockly.Blocks['pipe_set_gap'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('De verticale opening tussen de bovenste en onderste pijp. Kleiner = lastiger om door te passen.');
+    this.setTooltip('De verticale opening tussen de bovenste en onderste buis. Kleiner = lastiger om door te passen.');
   },
 };
 javascriptGenerator.forBlock['pipe_set_gap'] = (block, generator) => {
@@ -58,10 +58,10 @@ javascriptGenerator.forBlock['pipe_set_gap'] = (block, generator) => {
 // ── Value: nearest pipe X ─────────────────────────────────────────────────────
 Blockly.Blocks['nearest_pipe_x'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ dichtstbijzijnde pijp X');
+    this.appendDummyInput().appendField('🏗️ dichtstbijzijnde buis X');
     this.setOutput(true, 'Number');
     this.setColour('#4a90d9');
-    this.setTooltip('X-positie van de linkerrand van de dichtstbijzijnde aankomende pijp. Handig voor autopilot-logica!');
+    this.setTooltip('X-positie van de linkerrand van de dichtstbijzijnde aankomende buis. Handig voor autopilot-logica!');
   },
 };
 javascriptGenerator.forBlock['nearest_pipe_x'] = () => [`window.__pipes.getNearestX()`, Order.FUNCTION_CALL];
@@ -69,10 +69,10 @@ javascriptGenerator.forBlock['nearest_pipe_x'] = () => [`window.__pipes.getNeare
 // ── Value: nearest pipe gap top ───────────────────────────────────────────────
 Blockly.Blocks['nearest_pipe_gap_top'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ bovenkant opening dichtste pijp Y');
+    this.appendDummyInput().appendField('🏗️ bovenkant opening dichtste buis Y');
     this.setOutput(true, 'Number');
     this.setColour('#4a90d9');
-    this.setTooltip('Y-positie van de bovenkant van de opening in de dichtstbijzijnde pijp.');
+    this.setTooltip('Y-positie van de bovenkant van de opening in de dichtstbijzijnde buis.');
   },
 };
 javascriptGenerator.forBlock['nearest_pipe_gap_top'] = () => [`window.__pipes.getGapTop()`, Order.FUNCTION_CALL];
@@ -80,10 +80,10 @@ javascriptGenerator.forBlock['nearest_pipe_gap_top'] = () => [`window.__pipes.ge
 // ── Value: nearest pipe gap bottom ───────────────────────────────────────────
 Blockly.Blocks['nearest_pipe_gap_bottom'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ onderkant opening dichtste pijp Y');
+    this.appendDummyInput().appendField('🏗️ onderkant opening dichtste buis Y');
     this.setOutput(true, 'Number');
     this.setColour('#4a90d9');
-    this.setTooltip('Y-positie van de onderkant van de opening in de dichtstbijzijnde pijp.');
+    this.setTooltip('Y-positie van de onderkant van de opening in de dichtstbijzijnde buis.');
   },
 };
 javascriptGenerator.forBlock['nearest_pipe_gap_bottom'] = () => [`window.__pipes.getGapBottom()`, Order.FUNCTION_CALL];

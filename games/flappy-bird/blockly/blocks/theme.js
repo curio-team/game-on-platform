@@ -22,7 +22,7 @@ javascriptGenerator.forBlock['theme_bird_color'] = (block) =>
 
 Blockly.Blocks['theme_pipe_color'] = {
   init() {
-    this.appendDummyInput().appendField('🎨 pijpkleur').appendField(new FieldColour('#39ff14'), 'COLOR');
+    this.appendDummyInput().appendField('🎨 buiskleur').appendField(new FieldColour('#39ff14'), 'COLOR');
     this.setColour('#5ea765');
   },
 };

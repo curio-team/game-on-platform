@@ -48,7 +48,7 @@ javascriptGenerator.forBlock['theme_blocks'] = (block) =>
 
 Blockly.Blocks['theme_pipes'] = {
   init() {
-    this.appendDummyInput().appendField('\ud83c\udfa8 pijpkleur').appendField(new FieldColour('#00a800'), 'COLOR');
+    this.appendDummyInput().appendField('\ud83c\udfa8 buiskleur').appendField(new FieldColour('#00a800'), 'COLOR');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#5ea765');

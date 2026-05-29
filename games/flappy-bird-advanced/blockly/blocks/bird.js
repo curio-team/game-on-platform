@@ -36,10 +36,10 @@ javascriptGenerator.forBlock['bird_flap'] = (block, generator) => {
 // ── Boolean: bird hits a pipe ─────────────────────────────────────────────────
 Blockly.Blocks['bird_is_colliding'] = {
   init() {
-    this.appendDummyInput().appendField('🐦 vogel raakt een pijp');
+    this.appendDummyInput().appendField('🐦 vogel raakt een buis');
     this.setOutput(true, 'Boolean');
     this.setColour('#e6a817');
-    this.setTooltip('Waar als de vogel een pijp raakt. Gebruik dit in een "als"-blok om spel voorbij te activeren of een leven te verliezen.');
+    this.setTooltip('Waar als de vogel een buis raakt. Gebruik dit in een "als"-blok om spel voorbij te activeren of een leven te verliezen.');
   },
 };
 javascriptGenerator.forBlock['bird_is_colliding'] = () => [`window.__bird.isColliding()`, Order.FUNCTION_CALL];
