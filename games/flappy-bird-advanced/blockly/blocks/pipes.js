@@ -3,11 +3,11 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 // ── Statement: update all pipes ─────────────────────────────────────────────────────
 Blockly.Blocks['pipe_update'] = {
   init() {
-    this.appendDummyInput().appendField('🏗️ verplaats alle pijpen');
+    this.appendDummyInput().appendField('🏗️ verplaats alle buizen');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Verplaatst alle pijpen naar links met de ingestelde snelheid. Verwijdert pijpen die van het scherm zijn. Activeert "Wanneer een pijp is gepasseerd" als de vogel er voorbij komt.');
+    this.setTooltip('Verplaatst alle buizen naar links met de ingestelde snelheid. Verwijdert buizen die van het scherm zijn. Activeert "Wanneer een pijp is gepasseerd" als de vogel er voorbij komt.');
   },
 };
 javascriptGenerator.forBlock['pipe_update'] = () => `window.__pipes.update();\n`;
@@ -26,12 +26,12 @@ javascriptGenerator.forBlock['pipe_spawn_now'] = () => `window.__pipes.spawn();\
 // ── Statement: set pipe speed ─────────────────────────────────────────────────
 Blockly.Blocks['pipe_set_speed'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet pijpsnelheid op');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet buissnelheid op');
     this.appendDummyInput().appendField('pixels/frame (probeer 3)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Hoe snel pijpen naar links schuiven. Hoger = moeilijker. Veilig bereik: 1-10.');
+    this.setTooltip('Hoe snel buizen naar links schuiven. Hoger = moeilijker. Veilig bereik: 1-10.');
   },
 };
 javascriptGenerator.forBlock['pipe_set_speed'] = (block, generator) => {

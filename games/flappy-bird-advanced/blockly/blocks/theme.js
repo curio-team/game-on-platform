@@ -32,7 +32,7 @@ Blockly.Blocks['theme_pipe_color'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#5ea765');
-    this.setTooltip('Stelt de kleur van alle pijpen in.');
+    this.setTooltip('Stelt de kleur van alle buizen in.');
   },
 };
 javascriptGenerator.forBlock['theme_pipe_color'] = (block) =>

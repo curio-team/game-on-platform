@@ -29,10 +29,10 @@ javascriptGenerator.forBlock['world_gaps'] = (block, gen) => {
 
 Blockly.Blocks['world_pipes'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🌍 pijpen');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🌍 buizen');
     this.appendDummyInput().appendField('(0 = geen, 10 = veel)');
     this.setColour('#4a90d9');
-    this.setTooltip('Aantal pijpen in het level.');
+    this.setTooltip('Aantal buizen in het level.');
   },
 };
 javascriptGenerator.forBlock['world_pipes'] = (block, gen) => {

@@ -8,7 +8,7 @@ Blockly.Blocks['world_generate'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Genereert de wereld met alle blokken, pijpen, munten en vijanden. Zet dit in "Wanneer het spel start".');
+    this.setTooltip('Genereert de wereld met alle blokken, buizen, munten en vijanden. Zet dit in "Wanneer het spel start".');
   },
 };
 javascriptGenerator.forBlock['world_generate'] = () => `window.__world.generateLevel();\n`;
@@ -47,7 +47,7 @@ javascriptGenerator.forBlock['world_set_gaps'] = (block, gen) => {
 // ── Statement: set pipe count ─────────────────────────────────────────────────
 Blockly.Blocks['world_set_pipes'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('\ud83c\udf0d pijpen');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('\ud83c\udf0d buizen');
     this.appendDummyInput().appendField('(0-15)');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -139,7 +139,7 @@ Blockly.Blocks['world_check_landing'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#4a90d9');
-    this.setTooltip('Controleert of Mario op grond, blokken of pijpen landt. Controleert ook blokken van onderaf. Roep elke frame aan.');
+    this.setTooltip('Controleert of Mario op grond, blokken of buizen landt. Controleert ook blokken van onderaf. Roep elke frame aan.');
   },
 };
 javascriptGenerator.forBlock['world_check_landing'] = () => `window.__world.checkLanding();\n`;

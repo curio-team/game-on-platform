@@ -8,14 +8,14 @@ export const games = [
   {
     id: 'flappy-bird',
     title: 'CodeBird',
-    description: 'Programmeer de fysica, pijpen en visuals van een Flappy Bird-kloon.',
+    description: 'Programmeer de fysica, buizen en visuals van een Flappy Bird-kloon.',
     icon: '🐦',
     color: '#e6a817',
   },
   {
     id: 'flappy-bird-advanced',
     title: 'CodeBird++',
-    description: 'Schrijf de echte ‘game loop’ - zwaartekracht, pijpen en botsingen - volledig in Blockly.',
+    description: 'Schrijf de echte ‘game loop’ - zwaartekracht, buizen en botsingen - volledig in Blockly.',
     icon: '🐦+',
     color: '#e63946',
   },

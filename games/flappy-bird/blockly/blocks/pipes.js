@@ -3,7 +3,7 @@ import { javascriptGenerator, Order } from 'blockly/javascript';
 
 Blockly.Blocks['pipe_speed'] = {
   init() {
-    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet pijpsnelheid op');
+    this.appendValueInput('VALUE').setCheck('Number').appendField('🏗️ zet buissnelheid op');
     this.appendDummyInput().appendField('(1 = langzaam, 10 = erg snel)');
     this.setColour('#4a90d9');
   },

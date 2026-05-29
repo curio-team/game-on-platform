@@ -9,7 +9,7 @@ Blockly.Blocks['event_every_frame'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Code hierin draait elke frame (~60x per seconde). Pas zwaartekracht toe, controleer botsingen en spawn pijpen hier.');
+    this.setTooltip('Code hierin draait elke frame (~60x per seconde). Pas zwaartekracht toe, controleer botsingen en spawn buizen hier.');
   },
 };
 javascriptGenerator.forBlock['event_every_frame'] = (block, generator) => {
@@ -41,7 +41,7 @@ Blockly.Blocks['event_game_start'] = {
     this.setPreviousStatement(false);
     this.setNextStatement(false);
     this.setColour('#e63946');
-    this.setTooltip('Draait een keer wanneer het spel start. Zet levens, pijpsnelheid, kleuren enz. hier.');
+    this.setTooltip('Draait een keer wanneer het spel start. Zet levens, buissnelheid, kleuren enz. hier.');
   },
 };
 javascriptGenerator.forBlock['event_game_start'] = (block, generator) => {

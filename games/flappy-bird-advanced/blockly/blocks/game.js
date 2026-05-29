@@ -48,7 +48,7 @@ Blockly.Blocks['game_add_score'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#7b5ea7');
-    this.setTooltip('Voeg bonuspunten toe aan de score. (De score stijgt al automatisch bij pijpen passeren.)');
+    this.setTooltip('Voeg bonuspunten toe aan de score. (De score stijgt al automatisch bij buizen passeren.)');
   },
 };
 javascriptGenerator.forBlock['game_add_score'] = (block, generator) => {
@@ -110,7 +110,7 @@ Blockly.Blocks['game_every_n_frames'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour('#e6a817');
-    this.setTooltip('Draait de binnenste blokken een keer elke N game frames. 90 frames ~= 1.5 seconde. Gebruik dit om pijpen te spawnen.');
+    this.setTooltip('Draait de binnenste blokken een keer elke N game frames. 90 frames ~= 1.5 seconde. Gebruik dit om buizen te spawnen.');
   },
 };
 javascriptGenerator.forBlock['game_every_n_frames'] = (block, generator) => {
