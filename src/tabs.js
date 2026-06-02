@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly';
 import { javascriptGenerator } from 'blockly/javascript';
 import { getWorkspace } from './blockly/setup.js';
-import { formatCode } from './ui.js';
+import { updateCode } from './code-editor.js';
 
 export function showTab(tab) {
   const blocklyDiv = document.getElementById('blocklyDiv');
@@ -24,9 +24,7 @@ export function showTab(tab) {
     if (levelPanel) levelPanel.classList.remove('visible');
     try {
       const code = javascriptGenerator.workspaceToCode(getWorkspace());
-      document.getElementById('codeOutput').innerHTML =
-        `<span class="code-comment">// JOUW SPELPROGRAMMA\n// Deze code is gegenereerd uit je blokken!\n\n</span>` +
-        formatCode(code);
+      updateCode(`// JOUW SPELPROGRAMMA\n// Deze code is gegenereerd uit je blokken!\n\n${code}`);
     } catch {
       // ignore generation errors in preview
     }

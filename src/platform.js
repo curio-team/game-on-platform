@@ -26,7 +26,7 @@ import * as Blockly from 'blockly';
 import { javascriptGenerator } from 'blockly/javascript';
 import { initBlockly, getWorkspace } from './blockly/setup.js';
 import { showTab } from './tabs.js';
-import { formatCode } from './ui.js';
+import { initCodeEditor, updateCode } from './code-editor.js';
 
 export function initPlatform(gamePlugin) {
   const origin = window.location.origin;
@@ -94,8 +94,7 @@ export function initPlatform(gamePlugin) {
     try {
       // eslint-disable-next-line no-eval
       eval(code);
-      const codeOutput = document.getElementById('codeOutput');
-      if (codeOutput) codeOutput.innerHTML = formatCode(code);
+      updateCode(code);
     } catch (e) {
       console.warn('Block code error:', e);
     }
@@ -227,6 +226,7 @@ export function initPlatform(gamePlugin) {
 
   window.addEventListener('load', () => {
     initBlockly(gamePlugin.toolboxConfig, gamePlugin.defaultWorkspaceXML);
+    initCodeEditor();
     gamePlugin.drawIdleScreen();
 
     // Hot reload: while the game is running, apply new Blockly parameters/hooks
@@ -257,8 +257,7 @@ export function initPlatform(gamePlugin) {
               else pendingHotReloadCode = code;
             } else if (runningLocally) {
               applyCodeHotReload(code);
-              const codeOutput = document.getElementById('codeOutput');
-              if (codeOutput) codeOutput.innerHTML = formatCode(code);
+              updateCode(code);
             }
           }, HOT_RELOAD_DEBOUNCE_MS);
         });
@@ -441,8 +440,7 @@ export function initPlatform(gamePlugin) {
 
         pendingHotReloadCode = null;
         const code = javascriptGenerator.workspaceToCode(getWorkspace());
-        const codeOutput = document.getElementById('codeOutput');
-        if (codeOutput) codeOutput.innerHTML = formatCode(code);
+        updateCode(code);
 
         // We only send once the popout told us it is ready.
         if (!popoutReady) pendingRunCode = code;

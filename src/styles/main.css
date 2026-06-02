@@ -273,24 +273,18 @@ header::after {
   display: none;
   flex: 1;
   background: #050510;
-  padding: 20px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .generated-code-panel.visible {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
-.generated-code-panel pre {
-  font-family: 'VT323', monospace;
-  font-size: 18px;
-  color: var(--green);
-  line-height: 1.6;
-  white-space: pre-wrap;
-}
-
-.code-comment {
-  color: var(--dim);
+.generated-code-panel .cm-editor {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 
 /* ── BLOCKLY OVERRIDES ── */
