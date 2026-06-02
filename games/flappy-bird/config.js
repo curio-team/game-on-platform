@@ -10,6 +10,7 @@ export const DEFAULT_CONFIG = {
   skyColor: '#1a1a4e',
   birdColor: '#ffdd00',
   pipeColor: '#39ff14',
+  sounds: {},
 };
 
 export function resetConfig() {

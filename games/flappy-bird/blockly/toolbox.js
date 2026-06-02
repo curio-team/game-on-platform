@@ -29,6 +29,31 @@ export const toolboxConfig = {
       ]
     },
     {
+      kind: 'category', name: '🔊 Geluid', colour: '#e67e22', contents: [
+        {
+          kind: 'block', type: 'sound_on_flap',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 600 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 100 } } },
+          },
+        },
+        {
+          kind: 'block', type: 'sound_on_score',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 880 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 120 } } },
+          },
+        },
+        {
+          kind: 'block', type: 'sound_on_hit',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 200 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 250 } } },
+          },
+        },
+      ]
+    },
+    {
       kind: 'category', name: '🔢 Getallen', colour: '#888', contents: [
         { kind: 'block', type: 'math_number', fields: { NUM: 5 } },
       ]
@@ -47,4 +72,19 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="theme_bird_color" x="550" y="230"><field name="COLOR">#ffdd00</field></block>
   <block type="theme_pipe_color" x="640" y="300"><field name="COLOR">#39ff14</field></block>
   <block type="game_collision"   x="550" y="390"><field name="ACTION">bounce</field></block>
+  <block type="sound_on_flap"  x="900" y="30">
+    <field name="WAVE">square</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">600</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">100</field></block></value>
+  </block>
+  <block type="sound_on_score" x="900" y="150">
+    <field name="WAVE">sine</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">880</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">120</field></block></value>
+  </block>
+  <block type="sound_on_hit"   x="900" y="270">
+    <field name="WAVE">sawtooth</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">200</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">250</field></block></value>
+  </block>
 </xml>`;

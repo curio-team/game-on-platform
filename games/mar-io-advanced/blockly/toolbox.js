@@ -105,6 +105,17 @@ export const toolboxConfig = {
       ],
     },
     {
+      kind: 'category', name: '\ud83d\udd0a Geluid', colour: '#e67e22', contents: [
+        {
+          kind: 'block', type: 'sound_play',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 440 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 200 } } },
+          },
+        },
+      ],
+    },
+    {
       kind: 'category', name: '\u2705 Logica', colour: '#5b80a5', contents: [
         { kind: 'block', type: 'controls_if' },
         { kind: 'block', type: 'logic_compare' },
@@ -218,27 +229,41 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
 
   <block type="event_on_jump" x="560" y="20">
     <statement name="DO">
-      <block type="mario_jump">
-        <value name="FORCE">
-          <block type="math_number"><field name="NUM">10</field></block>
-        </value>
+      <block type="sound_play">
+        <field name="WAVE">square</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">500</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">130</field></block></value>
+        <next>
+          <block type="mario_jump">
+            <value name="FORCE">
+              <block type="math_number"><field name="NUM">10</field></block>
+            </value>
+          </block>
+        </next>
       </block>
     </statement>
   </block>
 
-  <block type="event_on_stomp" x="560" y="150">
+  <block type="event_on_stomp" x="560" y="200">
     <statement name="DO">
-      <block type="game_add_score">
-        <value name="AMOUNT">
-          <block type="math_number"><field name="NUM">200</field></block>
-        </value>
+      <block type="sound_play">
+        <field name="WAVE">square</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">250</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">100</field></block></value>
         <next>
-          <block type="mario_bounce">
-            <value name="FORCE">
-              <block type="math_number"><field name="NUM">7</field></block>
+          <block type="game_add_score">
+            <value name="AMOUNT">
+              <block type="math_number"><field name="NUM">200</field></block>
             </value>
             <next>
-              <block type="game_spark_effect"></block>
+              <block type="mario_bounce">
+                <value name="FORCE">
+                  <block type="math_number"><field name="NUM">7</field></block>
+                </value>
+                <next>
+                  <block type="game_spark_effect"></block>
+                </next>
+              </block>
             </next>
           </block>
         </next>
@@ -246,18 +271,49 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
     </statement>
   </block>
 
-  <block type="event_on_hurt" x="560" y="340">
+  <block type="event_on_hurt" x="560" y="430">
     <statement name="DO">
-      <block type="game_lose_life">
+      <block type="sound_play">
+        <field name="WAVE">square</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">350</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">250</field></block></value>
         <next>
-          <block type="mario_set_invincible">
-            <value name="FRAMES">
-              <block type="math_number"><field name="NUM">60</field></block>
+          <block type="game_lose_life">
+            <next>
+              <block type="mario_set_invincible">
+                <value name="FRAMES">
+                  <block type="math_number"><field name="NUM">60</field></block>
+                </value>
+                <next>
+                  <block type="mario_bounce">
+                    <value name="FORCE">
+                      <block type="math_number"><field name="NUM">10</field></block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="event_on_coin" x="560" y="680">
+    <statement name="DO">
+      <block type="sound_play">
+        <field name="WAVE">sine</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">1320</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">80</field></block></value>
+        <next>
+          <block type="game_add_coin">
+            <value name="AMOUNT">
+              <block type="math_number"><field name="NUM">1</field></block>
             </value>
             <next>
-              <block type="mario_bounce">
-                <value name="FORCE">
-                  <block type="math_number"><field name="NUM">10</field></block>
+              <block type="game_add_score">
+                <value name="AMOUNT">
+                  <block type="math_number"><field name="NUM">100</field></block>
                 </value>
               </block>
             </next>
@@ -267,36 +323,26 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
     </statement>
   </block>
 
-  <block type="event_on_coin" x="560" y="540">
+  <block type="event_on_block_hit" x="560" y="870">
     <statement name="DO">
-      <block type="game_add_coin">
-        <value name="AMOUNT">
-          <block type="math_number"><field name="NUM">1</field></block>
-        </value>
+      <block type="sound_play">
+        <field name="WAVE">square</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">400</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">80</field></block></value>
         <next>
-          <block type="game_add_score">
+          <block type="game_add_coin">
             <value name="AMOUNT">
-              <block type="math_number"><field name="NUM">100</field></block>
-            </value>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-
-  <block type="event_on_block_hit" x="560" y="700">
-    <statement name="DO">
-      <block type="game_add_coin">
-        <value name="AMOUNT">
-          <block type="math_number"><field name="NUM">1</field></block>
-        </value>
-        <next>
-          <block type="game_add_score">
-            <value name="AMOUNT">
-              <block type="math_number"><field name="NUM">100</field></block>
+              <block type="math_number"><field name="NUM">1</field></block>
             </value>
             <next>
-              <block type="game_spark_effect"></block>
+              <block type="game_add_score">
+                <value name="AMOUNT">
+                  <block type="math_number"><field name="NUM">100</field></block>
+                </value>
+                <next>
+                  <block type="game_spark_effect"></block>
+                </next>
+              </block>
             </next>
           </block>
         </next>

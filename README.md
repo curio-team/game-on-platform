@@ -11,9 +11,11 @@ An interactive coding platform for young people to experience programming at a h
 ## Games
 
 | Game | Style | What you program |
-|---|---|---|
+| --- | --- | --- |
 | 🐦 **CodeBird** | Config | Gravity, jump force, pipe speed, gap, lives, colors |
-| 🐦+ **CodeBird++** | Program game loop | Every-frame physics, pipe spawning, collision handling, input — entirely in Blockly |
+| 🐦 **CodeBird++** | Program game loop | Every-frame physics, pipe spawning, collision handling, input — entirely in Blockly |
+| 🍄 **MarIO** | Config | Gravity, jump, enemies, side scrolling |
+| 🍄 **MarIO++** | Program game loop | Every-frame physics, enemy behavior, level design — entirely in Blockly |
 | 🔢 **Guess the Number** | Config | Number range, hints, rules |
 
 **Config** games let you tweak parameters and see the effect. **Program game loop** games require you to wire up physics, spawning, and win/lose logic yourself using event blocks — closer to real programming.

@@ -12,6 +12,13 @@
  *   Space  : handled by platform (submit during gameplay)
  */
 
+import { playSound } from '/src/sound.js';
+
+function playConfigSound(key) {
+  const s = window.GAME_CONFIG.sounds?.[key];
+  if (s) playSound(s.freq, s.dur, s.wave);
+}
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -221,6 +228,7 @@ function submitGuess() {
     if (game.bestAttempts === null || used < game.bestAttempts) {
       game.bestAttempts = used;
     }
+    playConfigSound('onCorrect');
     game.running = false;
     game.state = 'won';
     document.getElementById('hintText').textContent = 'KLIK OP CANVAS OM OPNIEUW TE SPELEN';
@@ -234,9 +242,11 @@ function submitGuess() {
   if (guess > game.secret) {
     game.lastResult = 'too_high';
     game.history.push({ guess, result: 'too_high' });
+    playConfigSound('onTooHigh');
   } else {
     game.lastResult = 'too_low';
     game.history.push({ guess, result: 'too_low' });
+    playConfigSound('onTooLow');
   }
 
   if (game.attemptsLeft <= 0) {

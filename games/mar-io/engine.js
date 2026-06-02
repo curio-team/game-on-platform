@@ -1,4 +1,10 @@
 import { buildWorldFromJSON as _buildWorldFromJSON } from '/src/mario/levelBuilder.js';
+import { playSound } from '/src/sound.js';
+
+function playConfigSound(key) {
+  const s = window.GAME_CONFIG.sounds?.[key];
+  if (s) playSound(s.freq, s.dur, s.wave);
+}
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -533,6 +539,7 @@ function updateMario() {
   // ─ Jump ──────────────────────────────────────────────────────────────────
   const key = (c) => game.keys[c] || gpKeys[c];
   if ((key('Space') || key('ArrowUp') || key('KeyW')) && m.grounded) {
+    playConfigSound('onJump');
     m.vy = -cfg.jumpForce;
     m.grounded = false;
   }
@@ -645,6 +652,7 @@ function updateEnemies() {
       e.squishTimer = 30;
       game.score += 200;
       updateUI();
+      playConfigSound('onStomp');
       spawnParticles(e.x + e.w / 2, e.y, '#ffdd00', 4);
 
       if (cfg.stompAction === 'launch') m.vy = -cfg.jumpForce * 1.5;
@@ -658,6 +666,7 @@ function updateEnemies() {
       // Mario gets hurt
       game.lives--;
       updateUI();
+      playConfigSound('onHurt');
       spawnParticles(m.x + m.w / 2, m.y + m.h / 2, '#ff2244', 8);
       if (game.lives <= 0) { triggerGameOver(); return; }
       m.vy = -cfg.jumpForce;
@@ -674,6 +683,7 @@ function updateCoins() {
       c.collected = true;
       game.coins++;
       game.score += window.GAME_CONFIG.coinValue;
+      playConfigSound('onCoin');
       spawnParticles(c.x + 4, c.y + 6, '#ffdd00', 4);
       updateUI();
     }
@@ -726,6 +736,7 @@ export function initGame() {
 
 export function handleJump() {
   if (game.mario && game.mario.grounded) {
+    playConfigSound('onJump');
     game.mario.vy = -window.GAME_CONFIG.jumpForce;
     game.mario.grounded = false;
   }

@@ -1,3 +1,10 @@
+import { playSound } from '/src/sound.js';
+
+function playConfigSound(key) {
+  const s = window.GAME_CONFIG.sounds?.[key];
+  if (s) playSound(s.freq, s.dur, s.wave);
+}
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -132,6 +139,7 @@ export function drawIdleScreen() {
 
 function handleCollision() {
   const b = game.bird, action = window.GAME_CONFIG.collisionAction;
+  playConfigSound('onHit');
   spawnParticles(b.x, b.y, '#ff2244', 10);
 
   if (action === 'bounce') {
@@ -173,6 +181,7 @@ export function initGame() {
 }
 
 export function handleJump() {
+  playConfigSound('onFlap');
   game.bird.vy = -window.GAME_CONFIG.jumpForce;
 }
 
@@ -205,6 +214,7 @@ export function gameLoop() {
       game.pipes[i].scored = true;
       game.score++;
       if (game.score > game.best) game.best = game.score;
+      playConfigSound('onScore');
       spawnParticles(b.x, b.y, '#ffdd00', 5);
       updateUI();
     }

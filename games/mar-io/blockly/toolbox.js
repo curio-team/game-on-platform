@@ -32,6 +32,38 @@ export const toolboxConfig = {
       ],
     },
     {
+      kind: 'category', name: '🔊 Geluid', colour: '#e67e22', contents: [
+        {
+          kind: 'block', type: 'mario_sound_on_jump',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 500 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 130 } } },
+          },
+        },
+        {
+          kind: 'block', type: 'mario_sound_on_coin',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 1320 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 80 } } },
+          },
+        },
+        {
+          kind: 'block', type: 'mario_sound_on_stomp',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 250 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 100 } } },
+          },
+        },
+        {
+          kind: 'block', type: 'mario_sound_on_hurt',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 350 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 250 } } },
+          },
+        },
+      ],
+    },
+    {
       kind: 'category', name: '🔢 Getallen', colour: '#888', contents: [
         { kind: 'block', type: 'math_number', fields: { NUM: 5 } },
       ],
@@ -46,6 +78,26 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="rules_lives"   x="30"  y="270"> <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value></block>
   <block type="enemy_speed"   x="30"  y="350"> <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value></block>
   <block type="enemy_stomp"   x="30"  y="430"> <field name="ACTION">squish</field></block>
-  <block type="look_sky"      x="280" y="30">  <field name="COLOR">#5c94fc</field></block>
-  <block type="look_mario"    x="280" y="100"> <field name="COLOR">#e60000</field></block>
+  <block type="look_sky"      x="480" y="50">  <field name="COLOR">#5c94fc</field></block>
+  <block type="look_mario"    x="480" y="110"> <field name="COLOR">#e60000</field></block>
+  <block type="mario_sound_on_jump"  x="650" y="30">
+    <field name="WAVE">square</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">500</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">130</field></block></value>
+  </block>
+  <block type="mario_sound_on_coin"  x="650" y="150">
+    <field name="WAVE">sine</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">1320</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">80</field></block></value>
+  </block>
+  <block type="mario_sound_on_stomp" x="650" y="270">
+    <field name="WAVE">square</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">250</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">100</field></block></value>
+  </block>
+  <block type="mario_sound_on_hurt"  x="650" y="390">
+    <field name="WAVE">square</field>
+    <value name="FREQ"><block type="math_number"><field name="NUM">350</field></block></value>
+    <value name="DURATION"><block type="math_number"><field name="NUM">250</field></block></value>
+  </block>
 </xml>`;

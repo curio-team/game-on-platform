@@ -3,3 +3,4 @@ import './bird.js';
 import './pipes.js';
 import './gameRules.js';
 import './theme.js';
+import './sound.js';

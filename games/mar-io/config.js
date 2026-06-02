@@ -29,6 +29,7 @@ export const DEFAULT_CONFIG = {
   blockColor: '#e6a817',
   pipeColor: '#00a800',
   enemyColor: '#c84c0c',
+  sounds: {},
 };
 
 export function resetConfig() {

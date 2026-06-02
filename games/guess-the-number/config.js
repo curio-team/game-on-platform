@@ -4,6 +4,7 @@ export const DEFAULT_CONFIG = {
   hintStyle: 'basic', // 'basic' | 'temperature' | 'none'
   bgColor: '#0d0d2a',
   accentColor: '#ffdd00',
+  sounds: {},
 };
 
 export function resetConfig() {

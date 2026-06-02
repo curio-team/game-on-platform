@@ -4,3 +4,4 @@ import './bird.js';
 import './pipes.js';
 import './game.js';
 import './theme.js';
+import '/src/blockly/blocks/sound.js';

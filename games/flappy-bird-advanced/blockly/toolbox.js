@@ -78,6 +78,17 @@ export const toolboxConfig = {
       ],
     },
     {
+      kind: 'category', name: '🔊 Geluid', colour: '#e67e22', contents: [
+        {
+          kind: 'block', type: 'sound_play',
+          inputs: {
+            FREQ: { shadow: { type: 'math_number', fields: { NUM: 440 } } },
+            DURATION: { shadow: { type: 'math_number', fields: { NUM: 200 } } },
+          },
+        },
+      ],
+    },
+    {
       kind: 'category', name: '✅ Logica', colour: '#5b80a5', contents: [
         { kind: 'block', type: 'controls_if' },
         { kind: 'block', type: 'logic_compare' },
@@ -162,36 +173,64 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
 
   <block type="event_on_flap" x="560" y="20">
     <statement name="DO">
-      <block type="bird_flap">
-        <value name="FORCE">
-          <block type="math_number"><field name="NUM">12</field></block>
-        </value>
-      </block>
-    </statement>
-  </block>
-
-  <block type="event_on_score" x="560" y="160">
-    <statement name="DO">
-      <block type="game_add_score">
-        <value name="AMOUNT">
-          <block type="math_number"><field name="NUM">1</field></block>
-        </value>
+      <block type="sound_play">
+        <field name="WAVE">square</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">600</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">100</field></block></value>
         <next>
-          <block type="game_spark_effect"></block>
+          <block type="bird_flap">
+            <value name="FORCE">
+              <block type="math_number"><field name="NUM">12</field></block>
+            </value>
+          </block>
         </next>
       </block>
     </statement>
   </block>
 
-  <block type="event_on_collision" x="560" y="340">
+  <block type="event_on_score" x="560" y="200">
     <statement name="DO">
-      <block type="game_lose_life"></block>
+      <block type="sound_play">
+        <field name="WAVE">sine</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">880</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">120</field></block></value>
+        <next>
+          <block type="game_add_score">
+            <value name="AMOUNT">
+              <block type="math_number"><field name="NUM">1</field></block>
+            </value>
+            <next>
+              <block type="game_spark_effect"></block>
+            </next>
+          </block>
+        </next>
+      </block>
     </statement>
   </block>
 
-  <block type="event_on_out_of_bounds" x="560" y="460">
+  <block type="event_on_collision" x="560" y="420">
     <statement name="DO">
-      <block type="game_game_over"></block>
+      <block type="sound_play">
+        <field name="WAVE">sawtooth</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">200</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">250</field></block></value>
+        <next>
+          <block type="game_lose_life"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+
+  <block type="event_on_out_of_bounds" x="560" y="580">
+    <statement name="DO">
+      <block type="sound_play">
+        <field name="WAVE">square</field>
+        <value name="FREQ"><block type="math_number"><field name="NUM">350</field></block></value>
+        <value name="DURATION"><block type="math_number"><field name="NUM">250</field></block></value>
+        <next>
+          <block type="game_game_over"></block>
+        </next>
+      </block>
     </statement>
   </block>
 </xml>`;

@@ -2,3 +2,4 @@
 import './number.js';
 import './hints.js';
 import './visual.js';
+import './sound.js';
