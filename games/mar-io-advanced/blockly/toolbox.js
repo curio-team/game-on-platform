@@ -92,6 +92,10 @@ export const toolboxConfig = {
           inputs: { FRAMES: { shadow: { type: 'math_number', fields: { NUM: 60 } } } },
         },
         { kind: 'block', type: 'game_get_frame' },
+        {
+          kind: 'block', type: 'game_wait_ms',
+          inputs: { DELAY: { shadow: { type: 'math_number', fields: { NUM: 1000 } } } },
+        },
       ],
     },
     {
