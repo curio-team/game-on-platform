@@ -347,8 +347,7 @@ export function initLevelEditor(defaultLevelData) {
     sync();
   });
 
-  document.getElementById('resetLevel').addEventListener('click', () => {
-    if (!confirm('Level resetten naar standaard?')) return;
+  function resetToDefault() {
     screens = defaultLevelData.screens || 4;
     screensSlider.value = screens;
     screensValEl.textContent = screens;
@@ -356,6 +355,11 @@ export function initLevelEditor(defaultLevelData) {
     resizeCanvas();
     render();
     sync();
+  }
+
+  document.getElementById('resetLevel').addEventListener('click', () => {
+    if (!confirm('Level resetten naar standaard?')) return;
+    resetToDefault();
   });
 
   // Mouse events
@@ -389,4 +393,6 @@ export function initLevelEditor(defaultLevelData) {
   // ── Init ──────────────────────────────────────────────────────────────────
   levelToState(window.LEVEL_DATA);
   resizeCanvas();
+
+  return { resetToDefault };
 }

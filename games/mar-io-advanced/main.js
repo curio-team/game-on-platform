@@ -8,7 +8,7 @@ import { initPlatform } from '/src/platform.js';
 import { DEFAULT_LEVEL_DATA } from '/src/mario/defaultLevel.js';
 import { initLevelEditor } from '/src/levelEditor.js';
 
-initPlatform({
+const plugin = {
   toolboxConfig,
   defaultWorkspaceXML: DEFAULT_WORKSPACE_XML,
 
@@ -34,6 +34,11 @@ initPlatform({
       e.preventDefault();
     }
   },
-});
+};
 
-window.addEventListener('load', () => initLevelEditor(DEFAULT_LEVEL_DATA));
+initPlatform(plugin);
+
+window.addEventListener('load', () => {
+  const { resetToDefault } = initLevelEditor(DEFAULT_LEVEL_DATA);
+  plugin.resetLevel = resetToDefault;
+});

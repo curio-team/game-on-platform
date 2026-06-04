@@ -35,3 +35,11 @@ export function initBlockly(toolboxConfig, defaultWorkspaceXML) {
 export function getWorkspace() {
   return workspace;
 }
+
+export function resetWorkspace(defaultWorkspaceXML) {
+  if (!workspace) return;
+  workspace.clear();
+  const parser = new DOMParser();
+  const dom = parser.parseFromString(defaultWorkspaceXML, 'text/xml').documentElement;
+  Blockly.Xml.domToWorkspace(dom, workspace);
+}

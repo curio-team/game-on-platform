@@ -24,7 +24,7 @@
 
 import * as Blockly from 'blockly';
 import { javascriptGenerator } from 'blockly/javascript';
-import { initBlockly, getWorkspace } from './blockly/setup.js';
+import { initBlockly, getWorkspace, resetWorkspace } from './blockly/setup.js';
 import { showTab } from './tabs.js';
 import { initCodeEditor, updateCode } from './code-editor.js';
 
@@ -130,6 +130,15 @@ export function initPlatform(gamePlugin) {
     gamePlugin.stopGame();
     setIdleUI();
     notifyOpenerState(false);
+  }
+
+  function resetLocalGame() {
+    if (gamePlugin.isRunning()) stopLocalGame();
+    resetWorkspace(gamePlugin.defaultWorkspaceXML);
+    gamePlugin.resetConfig();
+    gamePlugin.drawIdleScreen();
+    setIdleUI();
+    gamePlugin.resetLevel?.();
   }
 
   function popoutActive() {
@@ -321,6 +330,17 @@ export function initPlatform(gamePlugin) {
       };
 
       popoutBtn?.addEventListener('click', openPopout);
+
+      let resetBtn = document.getElementById('resetBtn');
+      if (!resetBtn) {
+        resetBtn = document.createElement('button');
+        resetBtn.id = 'resetBtn';
+        resetBtn.className = 'reset-btn';
+        resetBtn.type = 'button';
+        resetBtn.textContent = '↺ RESET';
+        popoutBtn.insertAdjacentElement('afterend', resetBtn);
+      }
+      resetBtn.addEventListener('click', resetLocalGame);
 
       // Receive popout status and "ready" signals.
       window.addEventListener('message', (event) => {

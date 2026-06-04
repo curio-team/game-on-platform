@@ -156,6 +156,29 @@ header::after {
   box-shadow: 0 0 0 var(--border);
 }
 
+.reset-btn {
+  background: var(--bg);
+  color: #ffaa00;
+  border: 2px solid var(--border);
+  font-family: var(--font-pixel);
+  font-size: 0.55rem;
+  padding: 8px 14px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--border);
+  letter-spacing: 1px;
+  margin-left: 10px;
+}
+
+.reset-btn:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 3px 3px 0 var(--border);
+}
+
+.reset-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--border);
+}
+
 /* ── MAIN LAYOUT ── */
 .main {
   display: flex;
