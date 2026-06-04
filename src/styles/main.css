@@ -109,6 +109,10 @@ header::after {
   min-height: 0;
 }
 
+.popout-mode header {
+  display: none;
+}
+
 .popout-mode .game-panel {
   width: 100%;
   border-right: none;
