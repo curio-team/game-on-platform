@@ -33,6 +33,9 @@ initPlatform({
   // ── Input ─────────────────────────────────────────────────────────────────
   handleInput: () => handleJump(), // Space or canvas click during gameplay
 
+  // ── Reset ─────────────────────────────────────────────────────────────────
+  resetLevel: () => { game.best = 0; },
+
   // ── State queries ─────────────────────────────────────────────────────────
   isRunning: () => game.running,
   canRestart: () => game.state === 'gameover' || game.state === 'idle',

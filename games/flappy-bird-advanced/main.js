@@ -29,6 +29,9 @@ initPlatform({
   // ── Input ─────────────────────────────────────────────────────────────────
   handleInput: () => handleFlap(),
 
+  // ── Reset ─────────────────────────────────────────────────────────────────
+  resetLevel: () => { game.best = 0; },
+
   // ── State queries ─────────────────────────────────────────────────────────
   isRunning: () => game.running,
   canRestart: () => game.state === 'gameover' || game.state === 'idle',
