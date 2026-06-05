@@ -76,9 +76,19 @@ export const toolboxConfig = {
     },
     {
       kind: 'category', name: '🎨 Thema', colour: '#5ea765', contents: [
-        { kind: 'block', type: 'theme_sky' },
-        { kind: 'block', type: 'theme_bird_color' },
-        { kind: 'block', type: 'theme_pipe_color' },
+        {
+          kind: 'block', type: 'theme_sky',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#1a1a4e' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_bird_color',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#ffdd00' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_pipe_color',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#39ff14' } } } },
+        },
+        { kind: 'block', type: 'color_picker' },
       ],
     },
     {
@@ -99,6 +109,7 @@ export const toolboxConfig = {
         { kind: 'block', type: 'logic_operation' },
         { kind: 'block', type: 'logic_negate' },
         { kind: 'block', type: 'logic_boolean' },
+        { kind: 'block', type: 'random_branch' },
       ],
     },
     {

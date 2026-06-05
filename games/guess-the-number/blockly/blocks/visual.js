@@ -1,27 +1,26 @@
 import * as Blockly from 'blockly/core';
-import { FieldColour } from '@blockly/field-colour';
-import { javascriptGenerator } from 'blockly/javascript';
+import { javascriptGenerator, Order } from 'blockly/javascript';
 
 Blockly.Blocks['guess_bg_color'] = {
   init() {
-    this.appendDummyInput()
-      .appendField('🎨 achtergrondkleur')
-      .appendField(new FieldColour('#0d0d2a'), 'COLOR');
+    this.appendValueInput('COLOR').setCheck('Colour').appendField('🎨 achtergrondkleur');
     this.setColour('#5ea765');
     this.setTooltip('Achtergrondkleur van het spelscherm.');
   },
 };
-javascriptGenerator.forBlock['guess_bg_color'] = (block) =>
-  `window.GAME_CONFIG.bgColor = '${block.getFieldValue('COLOR')}';\n`;
+javascriptGenerator.forBlock['guess_bg_color'] = (block, generator) => {
+  const color = generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#0d0d2a'";
+  return `window.GAME_CONFIG.bgColor = ${color};\n`;
+};
 
 Blockly.Blocks['guess_accent_color'] = {
   init() {
-    this.appendDummyInput()
-      .appendField('🎨 accentkleur')
-      .appendField(new FieldColour('#ffdd00'), 'COLOR');
+    this.appendValueInput('COLOR').setCheck('Colour').appendField('🎨 accentkleur');
     this.setColour('#5ea765');
     this.setTooltip('Kleur voor knoppen, tekst en accenten.');
   },
 };
-javascriptGenerator.forBlock['guess_accent_color'] = (block) =>
-  `window.GAME_CONFIG.accentColor = '${block.getFieldValue('COLOR')}';\n`;
+javascriptGenerator.forBlock['guess_accent_color'] = (block, generator) => {
+  const color = generator.valueToCode(block, 'COLOR', Order.ATOMIC) || "'#ffdd00'";
+  return `window.GAME_CONFIG.accentColor = ${color};\n`;
+};

@@ -6,3 +6,4 @@ import './game.js';
 import './theme.js';
 import '/src/blockly/blocks/sound.js';
 import '/src/blockly/blocks/timing.js';
+import '/src/blockly/blocks/color.js';

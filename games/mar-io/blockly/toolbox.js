@@ -23,12 +23,31 @@ export const toolboxConfig = {
     },
     {
       kind: 'category', name: '🎨 Visueel Thema', colour: '#5ea765', contents: [
-        { kind: 'block', type: 'look_sky' },
-        { kind: 'block', type: 'look_ground' },
-        { kind: 'block', type: 'look_mario' },
-        { kind: 'block', type: 'look_blocks' },
-        { kind: 'block', type: 'look_pipes' },
-        { kind: 'block', type: 'look_enemies' },
+        {
+          kind: 'block', type: 'look_sky',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#5c94fc' } } } },
+        },
+        {
+          kind: 'block', type: 'look_ground',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#c84c0c' } } } },
+        },
+        {
+          kind: 'block', type: 'look_mario',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#e60000' } } } },
+        },
+        {
+          kind: 'block', type: 'look_blocks',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#e6a817' } } } },
+        },
+        {
+          kind: 'block', type: 'look_pipes',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#00a800' } } } },
+        },
+        {
+          kind: 'block', type: 'look_enemies',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#c84c0c' } } } },
+        },
+        { kind: 'block', type: 'color_picker' },
       ],
     },
     {
@@ -78,8 +97,8 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="rules_lives"   x="30"  y="270"> <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value></block>
   <block type="enemy_speed"   x="30"  y="350"> <value name="VALUE"><block type="math_number"><field name="NUM">1</field></block></value></block>
   <block type="enemy_stomp"   x="30"  y="430"> <field name="ACTION">squish</field></block>
-  <block type="look_sky"      x="480" y="50">  <field name="COLOR">#5c94fc</field></block>
-  <block type="look_mario"    x="480" y="110"> <field name="COLOR">#e60000</field></block>
+  <block type="look_sky" x="480" y="50"><value name="COLOR"><block type="color_picker"><field name="COLOR">#5c94fc</field></block></value></block>
+  <block type="look_mario" x="480" y="110"><value name="COLOR"><block type="color_picker"><field name="COLOR">#e60000</field></block></value></block>
   <block type="mario_sound_on_jump"  x="650" y="30">
     <field name="WAVE">square</field>
     <value name="FREQ"><block type="math_number"><field name="NUM">500</field></block></value>

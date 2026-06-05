@@ -4,3 +4,4 @@ import './enemies.js';
 import './gameRules.js';
 import './theme.js';
 import './sound.js';
+import '/src/blockly/blocks/color.js';

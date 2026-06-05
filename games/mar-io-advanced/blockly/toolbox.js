@@ -100,12 +100,31 @@ export const toolboxConfig = {
     },
     {
       kind: 'category', name: '\ud83c\udfa8 Thema', colour: '#5ea765', contents: [
-        { kind: 'block', type: 'theme_sky' },
-        { kind: 'block', type: 'theme_ground' },
-        { kind: 'block', type: 'theme_mario' },
-        { kind: 'block', type: 'theme_blocks' },
-        { kind: 'block', type: 'theme_pipes' },
-        { kind: 'block', type: 'theme_enemies' },
+        {
+          kind: 'block', type: 'theme_sky',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#5c94fc' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_ground',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#c84c0c' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_mario',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#e60000' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_blocks',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#e6a817' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_pipes',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#00a800' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_enemies',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#c84c0c' } } } },
+        },
+        { kind: 'block', type: 'color_picker' },
       ],
     },
     {
@@ -126,6 +145,7 @@ export const toolboxConfig = {
         { kind: 'block', type: 'logic_operation' },
         { kind: 'block', type: 'logic_negate' },
         { kind: 'block', type: 'logic_boolean' },
+        { kind: 'block', type: 'random_branch' },
       ],
     },
     {

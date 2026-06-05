@@ -14,8 +14,16 @@ export const toolboxConfig = {
     },
     {
       kind: 'category', name: '🎨 Visueel Thema', colour: '#5ea765', contents: [
-        { kind: 'block', type: 'guess_bg_color' },
-        { kind: 'block', type: 'guess_accent_color' },
+        {
+          kind: 'block', type: 'guess_bg_color',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#0d0d2a' } } } },
+        },
+        {
+          kind: 'block', type: 'guess_accent_color',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#ffdd00' } } } },
+        },
+        { kind: 'block', type: 'color_picker' },
+        { kind: 'block', type: 'random_branch' },
       ]
     },
     {
@@ -55,8 +63,8 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="guess_range"    x="30"  y="30">  <value name="VALUE"><block type="math_number"><field name="NUM">100</field></block></value></block>
   <block type="guess_attempts" x="30"  y="110"> <value name="VALUE"><block type="math_number"><field name="NUM">10</field></block></value></block>
   <block type="guess_hints"    x="30"  y="190"> <field name="STYLE">basic</field></block>
-  <block type="guess_bg_color" x="590" y="30">  <field name="COLOR">#0d0d2a</field></block>
-  <block type="guess_accent_color" x="550" y="110"><field name="COLOR">#ffdd00</field></block>
+  <block type="guess_bg_color" x="590" y="30"><value name="COLOR"><block type="color_picker"><field name="COLOR">#0d0d2a</field></block></value></block>
+  <block type="guess_accent_color" x="550" y="110"><value name="COLOR"><block type="color_picker"><field name="COLOR">#ffdd00</field></block></value></block>
   <block type="guess_sound_too_high" x="550" y="200">
     <field name="WAVE">sine</field>
     <value name="FREQ"><block type="math_number"><field name="NUM">660</field></block></value>

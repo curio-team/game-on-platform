@@ -23,9 +23,19 @@ export const toolboxConfig = {
     },
     {
       kind: 'category', name: '🎨 Visueel Thema', colour: '#5ea765', contents: [
-        { kind: 'block', type: 'theme_sky' },
-        { kind: 'block', type: 'theme_bird_color' },
-        { kind: 'block', type: 'theme_pipe_color' },
+        {
+          kind: 'block', type: 'theme_sky',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#1a1a4e' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_bird_color',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#ffdd00' } } } },
+        },
+        {
+          kind: 'block', type: 'theme_pipe_color',
+          inputs: { COLOR: { shadow: { type: 'color_picker', fields: { COLOR: '#39ff14' } } } },
+        },
+        { kind: 'block', type: 'color_picker' },
       ]
     },
     {
@@ -68,9 +78,9 @@ export const DEFAULT_WORKSPACE_XML = `<xml>
   <block type="pipe_gap"       x="30"  y="270"> <value name="VALUE"><block type="math_number"><field name="NUM">130</field></block></value></block>
   <block type="game_lives"     x="30"  y="350"> <value name="VALUE"><block type="math_number"><field name="NUM">3</field></block></value></block>
   <block type="pipe_interval"  x="550" y="70">  <value name="VALUE"><block type="math_number"><field name="NUM">90</field></block></value></block>
-  <block type="theme_sky"      x="550" y="150"> <field name="COLOR">#1a1a4e</field></block>
-  <block type="theme_bird_color" x="550" y="230"><field name="COLOR">#ffdd00</field></block>
-  <block type="theme_pipe_color" x="640" y="300"><field name="COLOR">#39ff14</field></block>
+  <block type="theme_sky" x="550" y="150"><value name="COLOR"><block type="color_picker"><field name="COLOR">#1a1a4e</field></block></value></block>
+  <block type="theme_bird_color" x="550" y="230"><value name="COLOR"><block type="color_picker"><field name="COLOR">#ffdd00</field></block></value></block>
+  <block type="theme_pipe_color" x="640" y="300"><value name="COLOR"><block type="color_picker"><field name="COLOR">#39ff14</field></block></value></block>
   <block type="game_collision"   x="550" y="390"><field name="ACTION">bounce</field></block>
   <block type="sound_on_flap"  x="900" y="30">
     <field name="WAVE">square</field>
