@@ -28,7 +28,7 @@ export const toolboxConfig = {
       ],
     },
     {
-      kind: 'category', name: '🏗️ Pipes', colour: '#4a90d9', contents: [
+      kind: 'category', name: '🏗️ Buizen', colour: '#4a90d9', contents: [
         { kind: 'block', type: 'pipe_update' },
         { kind: 'block', type: 'pipe_spawn_now' },
         {

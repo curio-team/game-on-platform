@@ -14,7 +14,7 @@ export const toolboxConfig = {
     },
     {
       kind: 'category',
-      name: '🏗️ Pipes',
+      name: '🏗️ Buizen',
       colour: '#4a90d9',
       contents: [
         { kind: 'block', type: 'pipe_speed' },

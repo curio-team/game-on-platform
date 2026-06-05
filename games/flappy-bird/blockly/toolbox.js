@@ -9,7 +9,7 @@ export const toolboxConfig = {
       ]
     },
     {
-      kind: 'category', name: '🏗️ Pipes', colour: '#4a90d9', contents: [
+      kind: 'category', name: '🏗️ Buizen', colour: '#4a90d9', contents: [
         { kind: 'block', type: 'pipe_speed' },
         { kind: 'block', type: 'pipe_gap' },
         { kind: 'block', type: 'pipe_interval' },
