@@ -33,7 +33,7 @@ javascriptGenerator.forBlock['event_every_frame'] = (block, gen) => {
 
 Blockly.Blocks['event_on_jump'] = {
   init() {
-    this.appendDummyInput().appendField('\ud83d\udc46 Wanneer speler springt:');
+    this.appendDummyInput().appendField('\ud83d\udc46 Wanneer speler springt (spatie / klik):');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(false);
     this.setNextStatement(false);

@@ -20,7 +20,7 @@ javascriptGenerator.forBlock['event_every_frame'] = (block, generator) => {
 // ── Hat block: When player taps / clicks ─────────────────────────────────────
 Blockly.Blocks['event_on_flap'] = {
   init() {
-    this.appendDummyInput().appendField('👆 Wanneer speler tikt / klikt:');
+    this.appendDummyInput().appendField('👆 Wanneer speler tikt / klikt / spatie drukt:');
     this.appendStatementInput('DO').setCheck(null);
     this.setPreviousStatement(false);
     this.setNextStatement(false);
