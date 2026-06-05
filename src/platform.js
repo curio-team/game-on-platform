@@ -530,6 +530,12 @@ export function initPlatform(gamePlugin) {
       if (ws) Blockly.svgResize(ws);
     });
 
+    if (!isPopout) {
+      window.addEventListener('beforeunload', () => {
+        if (popoutActive()) popoutWindow.close();
+      });
+    }
+
     if (isPopout) {
       window.addEventListener('resize', () => fitCanvasToViewport());
       // In case fonts load and change layout.
